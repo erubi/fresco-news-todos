@@ -11,7 +11,7 @@ module.exports = {
   module: {
     loaders: [
       {
-        test: /\.js?$/,
+        test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         include: path.join(__dirname, 'src'),
         loader: 'react-hot!babel',
@@ -30,7 +30,7 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: ['', '.js', '.scss'],
+    extensions: ['', '.js', '.jsx', '.scss'],
   },
   output: {
     path: __dirname + '/dist',
