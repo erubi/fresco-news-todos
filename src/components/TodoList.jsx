@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 import Immutable from 'immutable';
+import TableHeaderInfo from './TableHeaderInfo';
 import {
   Table,
   TableBody,
@@ -35,6 +36,7 @@ class TodoList extends Component {
     return (
       <Table>
         <TableHeader>
+          <TableHeaderInfo title={'Title'} />
           <TableRow>
             <TableHeaderColumn>Title</TableHeaderColumn>
             <TableHeaderColumn>Category</TableHeaderColumn>
