@@ -1,29 +1,27 @@
-import { combineReducers } from 'redux-immutable';
 import { todosActions } from '../actions';
-import { Map } from 'immutable';
+import { fromJS, List } from 'immutable';
 
 // Updates the pagination data for different actions.
-const todos = combineReducers({
-  byPage: (state = Map(), action) => {
-    switch (action.type) {
-      case todosActions.NEXT_PAGE:
-      case todosActions.PREV_PAGE:
-      case todosActions.ROWS_PER_PAGE:
-      case todosActions.TODOS_ADD:
-      case todosActions.TODOS_REMOVE:
-      default:
-        return state;
-    }
-  },
-  byId: (state = Map(), action) => {
-    switch (action.type) {
-      case todosActions.TODOS_ADD:
-      case todosActions.TODOS_REMOVE:
-      default:
-        return state;
-    }
-  },
-});
+const todo = (state, action) => {
+  switch (action.type) {
+    case todosActions.ADD_TODO:
+      return fromJS({ id: action.id, ...action.data, completed: false });
+    default:
+      return state;
+  }
+};
+
+
+const todos = (state = List(), action) => {
+  switch (action.type) {
+    case todosActions.ADD_TODO:
+      return state.push(todo(undefined, action));
+    case todosActions.REMOVE_TODO:
+      return state.filterNot(t => t.get('id') !== action.id);
+    default:
+      return state;
+  }
+};
 
 export default todos;
 
