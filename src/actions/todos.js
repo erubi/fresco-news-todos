@@ -1,4 +1,3 @@
-export const TODOS_REQUEST = 'TODOS_REQUEST';
-export const TODOS_SUCCESS = 'TODOS_SUCCESS';
-export const TODOS_FAILURE = 'TODOS_FAILURE';
+export const TODOS_ADD = 'TODOS_ADD';
+export const TODOS_UPDATE = 'TODOS_UPDATE';
 export const TODOS_REMOVE = 'TODOS_REMOVE';

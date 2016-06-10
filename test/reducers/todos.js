@@ -8,7 +8,7 @@ describe('todo reducer', () => {
     expect(
       reducer(undefined, {})
     ).to.equal(fromJS({
-      byFilter: {},
+      byPage: {},
       byId: {},
     }));
   });
