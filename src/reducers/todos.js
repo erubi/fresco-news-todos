@@ -25,3 +25,12 @@ const todos = (state = List(), action) => {
 
 export default todos;
 
+export const getVisibleTodos = (todosState, appState) => {
+  const rows = appState.get('rows');
+  const page = appState.get('page');
+  const i = rows * page;
+  const j = i + rows;
+
+  return todosState.slice(i, j);
+};
+
