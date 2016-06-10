@@ -24,7 +24,6 @@ module.exports = {
   },
   postcss() {
     return [
-      require('postcss-import')({ path: ['node_modules', './src'], addDependencyTo: webpack}),
       require('autoprefixer'),
       require('postcss-normalize'),
     ]

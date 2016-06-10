@@ -13,7 +13,7 @@ describe('todo reducer', () => {
   it('handles ADD_TODO', () => {
     const initialState = reducer(undefined, {});
     const todo = {
-      text: 'Example text',
+      title: 'Example text',
       category: 'Home',
       assignee: 'Me',
       hours: 2,
