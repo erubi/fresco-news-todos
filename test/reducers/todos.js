@@ -25,4 +25,12 @@ describe('todo reducer', () => {
 
     expect(nextState).to.equal(fromJS([{ id: action.id, ...todo, completed: false }]));
   });
+
+  it('handles REMOVE_TODO', () => {
+    const initialState = reducer(fromJS([{ id: '231', completed: false }]), {});
+    const action = todosActions.removeTodo('231');
+    const nextState = reducer(initialState, action);
+
+    expect(nextState).to.equal(fromJS([]));
+  });
 });

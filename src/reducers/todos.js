@@ -17,7 +17,7 @@ const todos = (state = List(), action) => {
     case todosActions.ADD_TODO:
       return state.push(todo(undefined, action));
     case todosActions.REMOVE_TODO:
-      return state.filterNot(t => t.get('id') !== action.id);
+      return state.filterNot(t => t.get('id') === action.id);
     default:
       return state;
   }
