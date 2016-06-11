@@ -58,7 +58,7 @@ class TableHeaderNav extends Component {
   }
 
   render() {
-    const { title, todos } = this.props;
+    const { title, todos, handleToggleAllTodos } = this.props;
 
     return (
       <table>
@@ -77,7 +77,7 @@ class TableHeaderNav extends Component {
           </tr>
           <tr className="header-cells">
             <th>
-              <i onClick={this.handleToggleAllTodosTodo} className="material-icons">
+              <i onClick={handleToggleAllTodos} className="material-icons">
                 {todos.every(t => t.get('completed')) ? 'check_box' : 'check_box_outline_blank'}
               </i>
             </th>

@@ -49,7 +49,7 @@ describe('todo reducer', () => {
         { id: '232', completed: false },
         { id: '233', completed: true },
       ]), {});
-    const action = todosActions.toggleAllTodos(true);
+    const action = { type: todosActions.TOGGLE_ALL_TODOS, completed: true };
     const nextState = reducer(initialState, action);
 
     expect(nextState).to.equal(fromJS(

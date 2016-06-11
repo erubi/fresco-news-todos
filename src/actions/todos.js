@@ -28,7 +28,16 @@ export const toggleTodo = (id) => ({
   id,
 });
 
-export const toggleAllTodos = (completed) => ({
-  type: TOGGLE_ALL_TODOS,
-  completed,
-});
+export const toggleAllTodos = () => (dispatch, getState) => {
+  if (getState().get('todos').every(t => t.get('completed'))) {
+    return dispatch({
+      type: TOGGLE_ALL_TODOS,
+      completed: false,
+    });
+  }
+
+  return dispatch({
+    type: TOGGLE_ALL_TODOS,
+    completed: true,
+  });
+};
