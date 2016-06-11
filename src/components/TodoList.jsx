@@ -11,7 +11,6 @@ import {
   TableHeaderColumn,
   TableRow,
   TableRowColumn,
-  TableFooter,
 } from 'material-ui/Table';
 
 class TodoList extends Component {
@@ -26,6 +25,13 @@ class TodoList extends Component {
 
   handleSetRows = (e, k, v) => {
     this.props.setRows(v);
+  }
+
+  handleCellClick = (rowNumber) => {
+    const { todos, toggleTodo } = this.props;
+    const todoId = todos.get(rowNumber).get('id');
+
+    if (todoId) toggleTodo(todoId);
   }
 
   renderTodo(todo, i) {
@@ -62,7 +68,11 @@ class TodoList extends Component {
           </TableHeader>
         </Table>
         <div className="table-body-ctr">
-          <Table className="todos-table-body">
+          <Table
+            onCellClick={(rowNumber) => this.handleCellClick(rowNumber)}
+            multiSelectable
+            className="todos-table-body"
+          >
             <TableBody className="table-body">
               {todos.map((todo, i) => this.renderTodo(todo, i))}
             </TableBody>
@@ -90,6 +100,7 @@ TodoList.propTypes = {
   rows: PropTypes.number,
   todos: PropTypes.instanceOf(Immutable.List).isRequired,
   addTodo: PropTypes.func.isRequired,
+  toggleTodo: PropTypes.func.isRequired,
   setRows: PropTypes.func.isRequired,
   addTodoDialogOpen: PropTypes.bool,
   openAddTodoDialog: PropTypes.func,

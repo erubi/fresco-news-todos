@@ -34,6 +34,7 @@ TodoListContainer.propTypes = {
 export default connect(mapStateToProps, {
   addTodo: todosActions.addTodo,
   removeTodo: todosActions.removeTodo,
+  toggleTodo: todosActions.toggleTodo,
   setRows: appActions.setRows,
 })(TodoListContainer);
 
