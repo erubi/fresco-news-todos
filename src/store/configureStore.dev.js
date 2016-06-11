@@ -2,7 +2,7 @@ import { createStore, applyMiddleware } from 'redux';
 // import thunk from 'redux-thunk';
 import createLogger from 'redux-logger';
 import rootReducer from '../reducers';
-import { Iterable } from 'immutable';
+import { Iterable, fromJS } from 'immutable';
 import { loadState, saveState } from '../localStorage';
 import throttle from 'lodash/throttle';
 
@@ -23,8 +23,8 @@ const logger = createLogger({
 
 
 export default function configureStore() {
-  // const persistedState = loadState();
-  const store = createStore(rootReducer, undefined, applyMiddleware(logger));
+  const persistedState = fromJS(loadState());
+  const store = createStore(rootReducer, persistedState, applyMiddleware(logger));
   store.subscribe(throttle(() => {
     saveState({
       todos: store.getState().get('todos'),
