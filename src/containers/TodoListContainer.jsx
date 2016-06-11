@@ -14,7 +14,7 @@ class TodoListContainer extends Component {
 
   render() {
     return (
-      <TodoList todos={this.props.todos} />
+      <TodoList {...this.props} />
     );
   }
 }

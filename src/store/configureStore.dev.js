@@ -23,8 +23,8 @@ const logger = createLogger({
 
 
 export default function configureStore() {
-  const persistedState = loadState();
-  const store = createStore(rootReducer, persistedState, applyMiddleware(logger));
+  // const persistedState = loadState();
+  const store = createStore(rootReducer, undefined, applyMiddleware(logger));
   store.subscribe(throttle(() => {
     saveState({
       todos: store.getState().get('todos'),
