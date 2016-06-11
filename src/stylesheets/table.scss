@@ -42,11 +42,10 @@
   font-weight: 500 !important;
 }
 
-.todo-row{
-  td {
+.table-header{
+  th{
     &:first-child{
-      text-align: left !important;
+      width: 24px;
     }
-    text-align: right !important;
   }
 }

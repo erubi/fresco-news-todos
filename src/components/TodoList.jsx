@@ -42,7 +42,7 @@ class TodoList extends Component {
     return (
       <div>
         <Table>
-          <TableHeader>
+          <TableHeader className="table-header">
             <TableHeaderNav handleAddTodo={this.handleAddTodo} title={'Title'} />
             <TableRow>
               <TableHeaderColumn>Title</TableHeaderColumn>
