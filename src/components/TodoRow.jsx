@@ -118,6 +118,7 @@ class TodoRow extends Component {
         <td>
           <div onClick={(e) => this.handlePopOverOpen(e, 'category', 'menu')}>
             {todo.get('category') || 'null'}
+            <i className="material-icons">arrow_drop_down</i>
           </div>
         </td>
         <td>
