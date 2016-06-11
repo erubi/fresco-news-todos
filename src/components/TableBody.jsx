@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 import Immutable from 'immutable';
-import IconButton from 'material-ui/IconButton';
 
 class TodoList extends Component {
   constructor(props) {

@@ -6,6 +6,7 @@ import { getVisibleTodos } from '../reducers';
 import { appActions, todosActions } from '../actions';
 import TableHeader from '../components/TableHeader';
 import TableBody from '../components/TableBody';
+import TableFooter from '../components/TableFooter';
 
 class TodoListContainer extends Component {
   constructor(props) {
@@ -18,7 +19,7 @@ class TodoListContainer extends Component {
   }
 
   render() {
-    const { todos, toggleAllTodos } = this.props;
+    const { todos, toggleAllTodos, setRows, rows, page } = this.props;
 
     return (
       <div>
@@ -29,6 +30,7 @@ class TodoListContainer extends Component {
           title={'Title'}
         />
         <TableBody {...this.props} />
+        <TableFooter setRows={setRows} rows={rows} page={page} />
       </div>
     );
   }
@@ -38,14 +40,17 @@ function mapStateToProps(state) {
   return {
     todos: getVisibleTodos(state),
     rows: state.getIn(['app', 'rows']),
+    page: state.getIn(['app', 'page']),
   };
 }
 
-
 TodoListContainer.propTypes = {
+  rows: PropTypes.number.isRequired,
+  page: PropTypes.number.isRequired,
   todos: PropTypes.instanceOf(Immutable.List),
   toggleAllTodos: PropTypes.func.isRequired,
   addTodo: PropTypes.func.isRequired,
+  setRows: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, {
