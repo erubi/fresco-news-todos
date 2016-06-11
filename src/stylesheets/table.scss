@@ -20,20 +20,26 @@ table, thead, tbody, tr{
 }
 
 table{
+  border-collapse:collapse;
   table-layout: fixed;
 }
 
 th, td{
-  padding: 20px 24px;
   text-align: left;
 }
 
 .table-header-ctr{
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+
   .title{
     font-weight: 700;
     font-size: 20px;
     line-height: 1.4;
     color: rgba(0, 0, 0, 0.87);
+  }
+
+  th{
+    padding: 20px 24px;
   }
 
   .controls{
@@ -59,6 +65,28 @@ th, td{
   height: 480px;
   overflow-y: scroll;
   width: 100%;
+
+  tr{
+    height: 48px;
+    border-top: 1px solid rgba(0, 0, 0, 0.12);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+
+    td{
+      > div{
+        display: table-cell;
+        vertical-align: middle;
+        padding: 0 24px;
+        height: 48px !important;
+        box-sizing: border-box;
+      }
+
+      i{
+        display: table-cell;
+        vertical-align: middle;
+      }
+    }
+  }
+
 }
 
 .todos-table-footer{
