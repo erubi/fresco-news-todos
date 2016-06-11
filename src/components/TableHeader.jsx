@@ -60,19 +60,22 @@ class TableHeaderNav extends Component {
     const { title } = this.props;
 
     return (
-      <tr className="table-header-nav">
-        <th className="title">{title}</th>
-        <th />
-        <th />
-        <th />
-        <th />
-        <th />
-        <th className="todo-header-btns">
-          <FontIcon className="material-icons" onClick={this.openNewTodoDialog}>add</FontIcon>
+      <div className="table-header-ctr">
+        <nav>
+          <span className="title">{title}</span>
           <FontIcon className="material-icons">more_vert</FontIcon>
-        </th>
+          <FontIcon className="material-icons" onClick={this.openNewTodoDialog}>add</FontIcon>
+        </nav>
+        <div className="header-cells">
+          <span className="title-cell">Title</span>
+          <span className="category-cell">Category</span>
+          <span className="status-cell">Status</span>
+          <span className="hours-cell">Hours (n)</span>
+          <span className="completed-cell">Completed (%)</span>
+          <span className="note-cell">Note</span>
+        </div>
         {this.renderAddTodoDialog()}
-      </tr>
+      </div>
     );
   }
 }

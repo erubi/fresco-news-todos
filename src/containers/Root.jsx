@@ -5,9 +5,15 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import '../stylesheets/index.scss';
 
+const muiTheme = getMuiTheme({
+  palette: {
+    primary1Color: '#0047bb',
+  },
+});
+
 const Root = ({ store }) => (
   <Provider store={store}>
-    <MuiThemeProvider muiTheme={getMuiTheme()}>
+    <MuiThemeProvider muiTheme={muiTheme}>
       <div className="app-ctr">
         <TodoListContainer />
       </div>

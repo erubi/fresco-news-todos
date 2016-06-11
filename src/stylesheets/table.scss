@@ -10,62 +10,33 @@
   }
 }
 
-.new-todo-dialog-title{
-  font-weight: 500 !important;
+.material-icons {
+  color: rgba(0, 0, 0, 0.54);
 }
 
-.todos-table-header{
-  .table-header-nav{
-    width: 100%;
+.table-header-ctr{
+  nav{
     height: 64px;
+    padding: 24px;
 
     .title{
-      padding: 20px 24px;
-      text-align: left;
+      font-weight: 500;
       font-size: 20px;
       line-height: 1.4;
       color: rgba(0, 0, 0, 0.87);
-      font-weight: 500;
     }
 
-    .todo-header-btns{
-      padding: 20px 24px;
-      text-align: right;
-
-      .material-icons{
-        cursor: pointer;
-        color: rgba(0, 0, 0, 0.54) !important;
-
-        &:last-child{
-          margin-left: 20px;
-        }
-      }
+    .material-icons {
+      float: right;
+      margin-left: 25px;
     }
   }
 
-  .table-header{
-    max-height: 120px;
-    height: 120px;
-    th{
-      &:first-child{
-        width: 24px;
-      }
-    }
+  .header-cells{
+    padding: 23px 21px;
   }
 }
 
-.table-body-ctr{
-  height: 480px !important;
-  max-height: 480px !important;
-  overflow-y: scroll;
-  .todos-table-body{
-    .table-body{
-      height: 480px !important;
-      max-height: 480px !important;
-      overflow-y: scroll;
-    }
-  }
-}
 
 .todos-table-footer{
   height: 56px;

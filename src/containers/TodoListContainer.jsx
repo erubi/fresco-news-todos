@@ -4,7 +4,7 @@ import Immutable from 'immutable';
 import { connect } from 'react-redux';
 import { getVisibleTodos } from '../reducers';
 import { appActions, todosActions } from '../actions';
-import TodoList from '../components/TodoList';
+import TableHeader from '../components/TableHeader';
 
 class TodoListContainer extends Component {
   constructor(props) {
@@ -14,7 +14,13 @@ class TodoListContainer extends Component {
 
   render() {
     return (
-      <TodoList {...this.props} />
+      <div>
+        <TableHeader
+          handleToggleAllTodos={this.handleToggleTodoAlLTodos}
+          handleAddTodo={this.handleAddTodo}
+          title={'Title'}
+        />
+      </div>
     );
   }
 }
