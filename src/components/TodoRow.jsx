@@ -3,28 +3,82 @@ import PureRenderMixin from 'react-addons-pure-render-mixin';
 import DropDownMenu from 'material-ui/DropDownMenu';
 import Immutable from 'immutable';
 import MenuItem from 'material-ui/MenuItem';
+import Popover from 'material-ui/Popover';
+import FlatButton from 'material-ui/FlatButton';
 
 class TodoRow extends Component {
   constructor(props) {
     super(props);
     this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
+    this.state = {
+      popOverOpen: false,
+    };
   }
 
   handleToggleTodo = (todoId) => {
     this.props.toggleTodo(todoId);
   }
 
-  handleUpdateTodo = (todoId, data) => {
-    this.props.updateTodo(todoId, data);
+  handleUpdateTodo = (data) => {
+    const { todo, updateTodo } = this.props;
+    this.setState({ popOverOpen: false }, () => updateTodo(todo.get('id'), data));
   }
+
+  handlePopOverOpen = (event, attr) => {
+    // This prevents ghost click.
+    event.preventDefault();
+
+    this.setState({
+      popOverOpen: true,
+      anchorEl: event.currentTarget,
+      popOverAttr: attr,
+    });
+  };
+
+  handlePopOverClose = () => {
+    this.setState({
+      popOverOpen: false,
+    });
+  };
+
+  renderPopOver = () => (
+    <Popover
+      open={this.state.popOverOpen}
+      className="todo-attr-popover"
+      anchorEl={this.state.anchorEl}
+      anchorOrigin={{ horizontal: 'left', vertical: 'bottom' }}
+      targetOrigin={{ horizontal: 'left', vertical: 'top' }}
+      onRequestClose={this.handleRequestClose}
+    >
+      <div>{this.state.popOverAttr}</div>
+      <div className="input">
+        <input maxLength="10" ref="popOverInput" type="text"></input>
+      </div>
+      <FlatButton
+        key={'cancel'}
+        label="Cancel"
+        style={{ color: '#0047bb' }}
+        onTouchTap={this.handlePopOverClose}
+      />
+      <FlatButton
+        key={'save'}
+        label="Save"
+        style={{ color: '#0047bb' }}
+        onTouchTap={() => this.handleUpdateTodo({
+          [this.state.popOverAttr]: this.refs.popOverInput.value,
+        })}
+      />
+    </Popover>
+  );
 
   render() {
     const { todo } = this.props;
-    const handleOnChange = (data) => this.handleUpdateTodo(todo.get('id'), data);
+    const handleOnChange = (data) => this.handleUpdateTodo(data);
 
     return (
       <tr>
         <td>
+          {this.renderPopOver()}
           <div>
             <i
               onClick={() => this.handleToggleTodo(todo.get('id'))}
@@ -49,12 +103,16 @@ class TodoRow extends Component {
             </DropDownMenu>
           </div>
         </td>
-        <td><div>{todo.get('status')}</div></td>
-        <td><div>{todo.get('hours')}</div></td>
         <td>
-          <div>{todo.get('percentComplete') ? `${todo.get('percentComplete')}%` : ''}</div>
+          <div onClick={(e) => this.handlePopOverOpen(e, 'status')}>
+            {todo.get('status') || 'null'}
+          </div>
         </td>
-        <td><div>{todo.get('note')}</div></td>
+        <td><div>{todo.get('hours') || 'null'}</div></td>
+        <td>
+          <div>{todo.get('percentComplete') ? `${todo.get('percentComplete')}%` : 'null'}</div>
+        </td>
+        <td><div>{todo.get('note') || 'null'}</div></td>
       </tr>
     );
   }

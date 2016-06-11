@@ -9,11 +9,6 @@ class TodoList extends Component {
     this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
   }
 
-  handleAddTodo = (title) => {
-    this.props.addTodo({ title });
-  }
-
-
   render() {
     const { todos, updateTodo, toggleTodo } = this.props;
 
@@ -37,14 +32,9 @@ class TodoList extends Component {
 }
 
 TodoList.propTypes = {
-  rows: PropTypes.number,
   todos: PropTypes.instanceOf(Immutable.List).isRequired,
-  addTodo: PropTypes.func.isRequired,
   toggleTodo: PropTypes.func.isRequired,
   updateTodo: PropTypes.func.isRequired,
-  addTodoDialogOpen: PropTypes.bool,
-  openAddTodoDialog: PropTypes.func,
-  closeAddTodoDialog: PropTypes.func,
 };
 
 export default TodoList;
