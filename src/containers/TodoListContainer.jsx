@@ -22,6 +22,7 @@ class TodoListContainer extends Component {
 function mapStateToProps(state) {
   return {
     todos: getVisibleTodos(state),
+    rows: state.getIn(['app', 'rows']),
   };
 }
 

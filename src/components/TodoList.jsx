@@ -44,7 +44,7 @@ class TodoList extends Component {
   }
 
   render() {
-    const { todos } = this.props;
+    const { rows, todos } = this.props;
 
     return (
       <Table className="todos-table">
@@ -71,7 +71,7 @@ class TodoList extends Component {
             <TableRowColumn>
               <div className="footer-controls">
                 <span>Rows per page:</span>
-                <DropDownMenu onChange={this.handleSetRows} className="rows-dropdown">
+                <DropDownMenu value={rows} onChange={this.handleSetRows} className="rows-dropdown">
                   <MenuItem value={5} primaryText="5" />
                   <MenuItem value={10} primaryText="10" />
                   <MenuItem value={15} primaryText="15" />
@@ -89,6 +89,7 @@ class TodoList extends Component {
 }
 
 TodoList.propTypes = {
+  rows: PropTypes.number,
   todos: PropTypes.instanceOf(Immutable.List).isRequired,
   addTodo: PropTypes.func.isRequired,
   setRows: PropTypes.func.isRequired,

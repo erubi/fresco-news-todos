@@ -1,3 +1,19 @@
+.new-todo-dialog{
+  width: 384px !important;
+  background-color: #fafafa;
+
+  input{
+    width: 336px;
+    outline: none;
+    border: none;
+    border-bottom: 2px solid #0047bb;
+  }
+}
+
+.new-todo-dialog-title{
+  font-weight: 500 !important;
+}
+
 .todos-table{
   .table-header-nav{
     width: 100%;
@@ -25,22 +41,6 @@
         }
       }
     }
-  }
-
-  .new-todo-dialog{
-    width: 384px !important;
-    background-color: #fafafa;
-
-    input{
-      width: 336px;
-      outline: none;
-      border: none;
-      border-bottom: 2px solid #0047bb;
-    }
-  }
-
-  .new-todo-dialog-title{
-    font-weight: 500 !important;
   }
 
   .table-header{
