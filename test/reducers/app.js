@@ -12,7 +12,7 @@ describe('app reducer', () => {
 
   it('handles NEXT_PAGE', () => {
     const initialState = reducer(undefined, {});
-    const action = appActions.nextPage();
+    const action = { type: appActions.NEXT_PAGE };
     const nextState = reducer(initialState, action);
 
     expect(nextState).to.equal(fromJS({ page: 1, rows: 10 }));

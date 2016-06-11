@@ -24,7 +24,7 @@ const logger = createLogger({
 
 export default function configureStore() {
   const persistedState = fromJS(loadState());
-  const store = createStore(rootReducer, persistedState, applyMiddleware(logger, thunk));
+  const store = createStore(rootReducer, persistedState, applyMiddleware(thunk, logger));
   store.subscribe(throttle(() => {
     saveState({
       todos: store.getState().get('todos'),
