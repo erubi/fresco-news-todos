@@ -95,10 +95,10 @@ class TodoRow extends Component {
   );
 
   render() {
-    const { todo } = this.props;
+    const { todo, selectTodo } = this.props;
 
     return (
-      <tr>
+      <tr onClick={() => selectTodo(todo.get('id'))}>
         <td>
           {this.renderPopOver()}
           <div>
@@ -150,6 +150,7 @@ TodoRow.propTypes = {
   todo: PropTypes.instanceOf(Immutable.Map),
   toggleTodo: PropTypes.func.isRequired,
   updateTodo: PropTypes.func.isRequired,
+  selectTodo: PropTypes.func.isRequired,
 };
 
 export default TodoRow;

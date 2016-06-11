@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 import Immutable from 'immutable';
+import remove from 'lodash/remove';
 import { connect } from 'react-redux';
 import { getVisibleTodos } from '../reducers';
 import { appActions, todosActions } from '../actions';
@@ -22,9 +23,17 @@ class TodoListContainer extends Component {
     this.props.addTodo({ title });
   }
 
-  selectTodo = (todoId) => {
-    const selected = this.state.selectedTodos.push(todoId);
-    this.setState({ selectedTodos: selected });
+  selectTodo(todoId) {
+    let selected;
+    if (!todoId) return null;
+    const { selectedTodos } = this.state;
+
+    if (selectedTodos.includes(todoId)) {
+      selected = remove(selectedTodos, todoId);
+    } else {
+      selected = selectedTodos.concat(todoId);
+    }
+    return this.setState({ selectedTodos: selected });
   }
 
   renderTodo = (key, todo) => (
@@ -33,6 +42,7 @@ class TodoListContainer extends Component {
       todo={todo}
       toggleTodo={this.props.toggleTodo}
       updateTodo={this.props.updateTodo}
+      selectTodo={(todoId) => this.selectTodo(todoId)}
     />
   );
 
@@ -54,6 +64,7 @@ class TodoListContainer extends Component {
           handleToggleAllTodos={toggleAllTodos}
           todos={todos}
           handleAddTodo={this.handleAddTodo}
+          selectedTodos={this.state.selectedTodos}
           title={'Title'}
         />
         <TableBody todos={todos} renderTodo={this.renderTodo} />

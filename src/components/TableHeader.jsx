@@ -57,24 +57,48 @@ class TableHeaderNav extends Component {
     );
   }
 
+  renderControls = () => {
+    const { title, selectedTodos } = this.props;
+    if (selectedTodos.length) {
+      return (
+        <tr className="controls selected-todos">
+          <th className="title">{title}</th>
+          <th />
+          <th />
+          <th />
+          <th />
+          <th />
+          <th>
+            <FontIcon className="material-icons">more_vert</FontIcon>
+            <FontIcon className="material-icons" onClick={this.openNewTodoDialog}>add</FontIcon>
+          </th>
+        </tr>
+      );
+    }
+
+    return (
+      <tr className="controls">
+        <th className="title">{title}</th>
+        <th />
+        <th />
+        <th />
+        <th />
+        <th />
+        <th>
+          <FontIcon className="material-icons">more_vert</FontIcon>
+          <FontIcon className="material-icons" onClick={this.openNewTodoDialog}>add</FontIcon>
+        </th>
+      </tr>
+    );
+  }
+
   render() {
-    const { title, todos, handleToggleAllTodos } = this.props;
+    const { todos, handleToggleAllTodos } = this.props;
 
     return (
       <table>
         <thead className="table-header-ctr">
-          <tr className="controls">
-            <th className="title">{title}</th>
-            <th />
-            <th />
-            <th />
-            <th />
-            <th />
-            <th>
-              <FontIcon className="material-icons">more_vert</FontIcon>
-              <FontIcon className="material-icons" onClick={this.openNewTodoDialog}>add</FontIcon>
-            </th>
-          </tr>
+          {this.renderControls()}
           <tr className="header-cells">
             <th>
               <i onClick={handleToggleAllTodos} className="material-icons">
@@ -100,6 +124,7 @@ TableHeaderNav.propTypes = {
   todos: PropTypes.instanceOf(Immutable.List).isRequired,
   handleAddTodo: PropTypes.func.isRequired,
   handleToggleAllTodos: PropTypes.func.isRequired,
+  selectedTodos: PropTypes.array.isRequired,
 };
 
 export default TableHeaderNav;
