@@ -59,4 +59,14 @@ describe('todo reducer', () => {
         { id: '233', completed: true },
       ]));
   });
+
+  it('handles UPDATE_TODO', () => {
+    const initialState = reducer(fromJS([{ id: '231', completed: false }]), {});
+    const action = todosActions.updateTodo('231', { title: 'blah', assignee: 'dude' });
+    const nextState = reducer(initialState, action);
+
+    expect(nextState).to.equal(fromJS(
+      [{ id: '231', completed: false, title: 'blah', assignee: 'dude' }]
+    ));
+  });
 });

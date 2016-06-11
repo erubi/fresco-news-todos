@@ -18,7 +18,7 @@ export const removeTodo = (id) => ({
 });
 
 export const updateTodo = (id, data) => ({
-  type: TOGGLE_TODO,
+  type: UPDATE_TODO,
   id,
   data,
 });

@@ -13,6 +13,11 @@ const todo = (state, action) => {
       return state.update('completed', v => !v);
     case todosActions.TOGGLE_ALL_TODOS:
       return state.set('completed', action.completed);
+    case todosActions.UPDATE_TODO:
+      if (state.get('id') !== action.id) {
+        return state;
+      }
+      return state.merge(action.data);
     default:
       return state;
   }
@@ -28,6 +33,8 @@ const todos = (state = List(), action) => {
     case todosActions.TOGGLE_TODO:
       return state.map(t => todo(t, action));
     case todosActions.TOGGLE_ALL_TODOS:
+      return state.map(t => todo(t, action));
+    case todosActions.UPDATE_TODO:
       return state.map(t => todo(t, action));
     default:
       return state;
