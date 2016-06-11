@@ -7,16 +7,34 @@ import { appActions, todosActions } from '../actions';
 import TableHeader from '../components/TableHeader';
 import TableBody from '../components/TableBody';
 import TableFooter from '../components/TableFooter';
+import TodoRow from '../components/TodoRow';
 
 class TodoListContainer extends Component {
   constructor(props) {
     super(props);
     this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
+    this.state = {
+      selectedTodos: [],
+    };
   }
 
   handleAddTodo = (title) => {
     this.props.addTodo({ title });
   }
+
+  selectTodo = (todoId) => {
+    const selected = this.state.selectedTodos.push(todoId);
+    this.setState({ selectedTodos: selected });
+  }
+
+  renderTodo = (key, todo) => (
+    <TodoRow
+      key={key}
+      todo={todo}
+      toggleTodo={this.props.toggleTodo}
+      updateTodo={this.props.updateTodo}
+    />
+  );
 
   render() {
     const {
@@ -38,7 +56,7 @@ class TodoListContainer extends Component {
           handleAddTodo={this.handleAddTodo}
           title={'Title'}
         />
-        <TableBody {...this.props} />
+        <TableBody todos={todos} renderTodo={this.renderTodo} />
         <TableFooter
           prevPage={prevPage}
           nextPage={nextPage}
@@ -67,6 +85,8 @@ TodoListContainer.propTypes = {
   page: PropTypes.number.isRequired,
   totalNumTodos: PropTypes.number.isRequired,
   todos: PropTypes.instanceOf(Immutable.List),
+  toggleTodo: PropTypes.func.isRequired,
+  updateTodo: PropTypes.func.isRequired,
   toggleAllTodos: PropTypes.func.isRequired,
   addTodo: PropTypes.func.isRequired,
   setRows: PropTypes.func.isRequired,

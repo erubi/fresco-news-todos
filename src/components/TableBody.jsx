@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 import Immutable from 'immutable';
-import TodoRow from './TodoRow';
 
 class TodoList extends Component {
   constructor(props) {
@@ -10,20 +9,13 @@ class TodoList extends Component {
   }
 
   render() {
-    const { todos, updateTodo, toggleTodo } = this.props;
+    const { todos, renderTodo } = this.props;
 
     return (
       <div className="tbody-ctr">
         <table>
           <tbody>
-            {todos.map((todo, i) =>
-              <TodoRow
-                key={i}
-                todo={todo}
-                updateTodo={updateTodo}
-                toggleTodo={toggleTodo}
-              />
-             )}
+            {todos.map((todo, i) => renderTodo(i, todo))}
           </tbody>
         </table>
       </div>
@@ -33,8 +25,7 @@ class TodoList extends Component {
 
 TodoList.propTypes = {
   todos: PropTypes.instanceOf(Immutable.List).isRequired,
-  toggleTodo: PropTypes.func.isRequired,
-  updateTodo: PropTypes.func.isRequired,
+  renderTodo: PropTypes.func.isRequired,
 };
 
 export default TodoList;
