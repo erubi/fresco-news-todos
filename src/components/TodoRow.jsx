@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
-import DropDownMenu from 'material-ui/DropDownMenu';
 import Immutable from 'immutable';
+import Menu from 'material-ui/Menu';
 import MenuItem from 'material-ui/MenuItem';
 import Popover from 'material-ui/Popover';
 import FlatButton from 'material-ui/FlatButton';
@@ -66,10 +66,18 @@ class TodoRow extends Component {
         label="Save"
         style={{ color: '#0047bb' }}
         onTouchTap={() => this.handleUpdateTodo({
-          [this.state.popOverAttr]: this.refs.popOverInput.value,
+          [attr]: this.refs.popOverInput.value,
         })}
       />
     </div>
+  );
+
+  renderMenuPopOver = (attr) => (
+    <Menu onChange={(e, v) => this.handleUpdateTodo({ [attr]: v })}>
+      <MenuItem value={"Home"} primaryText="Home" />
+      <MenuItem value={"Work"} primaryText="Work" />
+      <MenuItem value={"Life"} primaryText="Life" />
+    </Menu>
   );
 
   renderPopOver = () => (
@@ -80,13 +88,14 @@ class TodoRow extends Component {
       targetOrigin={{ horizontal: 'left', vertical: 'top' }}
       onRequestClose={this.handleRequestClose}
     >
-      {this.renderInputPopOver(this.state.popOverAttr, this.state.popOverType)}
+      {this.state.popOverType === 'menu'
+        ? this.renderMenuPopOver(this.state.popOverAttr, this.state.popOverType)
+        : this.renderInputPopOver(this.state.popOverAttr, this.state.popOverType)}
     </Popover>
   );
 
   render() {
     const { todo } = this.props;
-    const handleOnChange = (data) => this.handleUpdateTodo(data);
 
     return (
       <tr>
@@ -101,19 +110,14 @@ class TodoRow extends Component {
             </i>
           </div>
         </td>
-        <td><div>{todo.get('title')}</div></td>
         <td>
-          <div>
-            <DropDownMenu
-              ref="category"
-              value={todo.get('category')}
-              onChange={(e, k, v) => handleOnChange({ category: v })}
-              className="category-dropdown"
-            >
-              <MenuItem value={"Home"} primaryText="Home" />
-              <MenuItem value={"Work"} primaryText="Work" />
-              <MenuItem value={"Life"} primaryText="Life" />
-            </DropDownMenu>
+          <div onClick={(e) => this.handlePopOverOpen(e, 'title', 'text')}>
+            {todo.get('title')}
+          </div>
+        </td>
+        <td>
+          <div onClick={(e) => this.handlePopOverOpen(e, 'category', 'menu')}>
+            {todo.get('category') || 'null'}
           </div>
         </td>
         <td>
