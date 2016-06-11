@@ -118,6 +118,7 @@ th, td{
     color: rgba(0, 0, 0, 0.54);
     font-size: 12px;
     float: right;
+    padding: 0 16px;
 
     .rows-dropdown{
       vertical-align: middle;
@@ -125,6 +126,22 @@ th, td{
     .rows-label{
       display: table-cell;
       vertical-align: middle;
+    }
+
+    .page-label{
+      display: table-cell;
+      vertical-align: middle;
+      padding-right: 24px;
+    }
+
+    i.material-icons{
+      display: table-cell;
+      vertical-align: middle;
+      &:last-child{
+        padding-left: 16px;
+      }
+      color: rgba(0, 0, 0, 0.54);
+      font-size: 20px;
     }
   }
 }

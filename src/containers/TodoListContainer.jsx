@@ -19,7 +19,16 @@ class TodoListContainer extends Component {
   }
 
   render() {
-    const { todos, toggleAllTodos, setRows, rows, page } = this.props;
+    const {
+      todos,
+      toggleAllTodos,
+      setRows,
+      rows,
+      page,
+      nextPage,
+      prevPage,
+      totalNumTodos,
+    } = this.props;
 
     return (
       <div>
@@ -30,7 +39,15 @@ class TodoListContainer extends Component {
           title={'Title'}
         />
         <TableBody {...this.props} />
-        <TableFooter setRows={setRows} rows={rows} page={page} />
+        <TableFooter
+          prevPage={prevPage}
+          nextPage={nextPage}
+          visibleNumTodos={todos.size}
+          totalNumTodos={totalNumTodos}
+          setRows={setRows}
+          rows={rows}
+          page={page}
+        />
       </div>
     );
   }
@@ -39,6 +56,7 @@ class TodoListContainer extends Component {
 function mapStateToProps(state) {
   return {
     todos: getVisibleTodos(state),
+    totalNumTodos: state.get('todos').size,
     rows: state.getIn(['app', 'rows']),
     page: state.getIn(['app', 'page']),
   };
@@ -47,10 +65,13 @@ function mapStateToProps(state) {
 TodoListContainer.propTypes = {
   rows: PropTypes.number.isRequired,
   page: PropTypes.number.isRequired,
+  totalNumTodos: PropTypes.number.isRequired,
   todos: PropTypes.instanceOf(Immutable.List),
   toggleAllTodos: PropTypes.func.isRequired,
   addTodo: PropTypes.func.isRequired,
   setRows: PropTypes.func.isRequired,
+  prevPage: PropTypes.func.isRequired,
+  nextPage: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, {
@@ -60,5 +81,7 @@ export default connect(mapStateToProps, {
   toggleTodo: todosActions.toggleTodo,
   toggleAllTodos: todosActions.toggleAllTodos,
   setRows: appActions.setRows,
+  prevPage: appActions.prevPage,
+  nextPage: appActions.nextPage,
 })(TodoListContainer);
 

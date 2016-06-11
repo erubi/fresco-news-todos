@@ -14,7 +14,16 @@ class TableFooter extends Component {
   }
 
   render() {
-    const { rows } = this.props;
+    const {
+      rows,
+      page,
+      totalNumTodos,
+      visibleNumTodos,
+      prevPage,
+      nextPage,
+    } = this.props;
+    const i = (rows * page);
+    const j = i + rows;
 
     return (
       <div className="todos-table-footer">
@@ -35,6 +44,12 @@ class TableFooter extends Component {
             <MenuItem value={25} primaryText="25" />
             <MenuItem value={30} primaryText="30" />
           </DropDownMenu>
+
+          <div className="page-label">
+            {`${i || 1}-${j > totalNumTodos ? visibleNumTodos + i : j} of ${totalNumTodos}`}
+          </div>
+          <i onClick={prevPage} className="material-icons">chevron_left</i>
+          <i onClick={nextPage} className="material-icons">chevron_right</i>
         </div>
       </div>
     );
@@ -44,7 +59,11 @@ class TableFooter extends Component {
 TableFooter.propTypes = {
   rows: PropTypes.number.isRequired,
   page: PropTypes.number.isRequired,
+  totalNumTodos: PropTypes.number.isRequired,
+  visibleNumTodos: PropTypes.number.isRequired,
   setRows: PropTypes.func.isRequired,
+  prevPage: PropTypes.func.isRequired,
+  nextPage: PropTypes.func.isRequired,
 };
 
 export default TableFooter;
