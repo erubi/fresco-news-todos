@@ -86,7 +86,7 @@ class TodoRow extends Component {
       anchorEl={this.state.anchorEl}
       anchorOrigin={{ horizontal: 'left', vertical: 'bottom' }}
       targetOrigin={{ horizontal: 'left', vertical: 'top' }}
-      onRequestClose={this.handleRequestClose}
+      onRequestClose={this.handlePopOverClose}
     >
       {this.state.popOverType === 'menu'
         ? this.renderMenuPopOver(this.state.popOverAttr, this.state.popOverType)
