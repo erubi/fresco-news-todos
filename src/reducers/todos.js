@@ -10,8 +10,9 @@ const todo = (state, action) => {
       if (state.get('id') !== action.id) {
         return state;
       }
-
       return state.update('completed', v => !v);
+    case todosActions.TOGGLE_ALL_TODOS:
+      return state.set('completed', action.completed);
     default:
       return state;
   }
@@ -25,6 +26,8 @@ const todos = (state = List(), action) => {
     case todosActions.REMOVE_TODO:
       return state.filterNot(t => t.get('id') === action.id);
     case todosActions.TOGGLE_TODO:
+      return state.map(t => todo(t, action));
+    case todosActions.TOGGLE_ALL_TODOS:
       return state.map(t => todo(t, action));
     default:
       return state;

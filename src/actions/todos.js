@@ -28,6 +28,7 @@ export const toggleTodo = (id) => ({
   id,
 });
 
-export const toggleAllTodos = () => ({
+export const toggleAllTodos = (completed) => ({
   type: TOGGLE_ALL_TODOS,
+  completed,
 });
