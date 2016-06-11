@@ -112,12 +112,18 @@ th, td{
 	box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.12);
 
   .footer-controls{
+    display: table;
+    height: 100%;
     vertical-align: middle;
     color: rgba(0, 0, 0, 0.54);
     font-size: 12px;
     float: right;
 
     .rows-dropdown{
+      vertical-align: middle;
+    }
+    .rows-label{
+      display: table-cell;
       vertical-align: middle;
     }
   }

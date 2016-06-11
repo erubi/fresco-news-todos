@@ -19,8 +19,15 @@ class TableFooter extends Component {
     return (
       <div className="todos-table-footer">
         <div className="footer-controls">
-          <span>Rows per page:</span>
-          <DropDownMenu value={rows} onChange={this.handleSetRows} className="rows-dropdown">
+          <div className="rows-label">Rows per page:</div>
+          <DropDownMenu
+            underlineStyle={{ display: 'none' }}
+            iconStyle={{ fill: 'rgba(0, 0, 0, 0.54)', fontSize: '12px' }}
+            labelStyle={{ fontSize: '12px', color: 'rgba(0, 0, 0, 0.54)' }}
+            value={rows}
+            onChange={this.handleSetRows}
+            className="rows-dropdown"
+          >
             <MenuItem value={5} primaryText="5" />
             <MenuItem value={10} primaryText="10" />
             <MenuItem value={15} primaryText="15" />
