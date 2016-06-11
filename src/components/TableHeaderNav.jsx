@@ -19,7 +19,9 @@ class TableHeaderNav extends Component {
 
   handleAddTodo = () => {
     const title = this.refs.newTodoTitle.value;
-    this.props.handleAddTodo(title);
+    if (title && title.length) {
+      this.setState({ newTodoDialogOpen: false }, this.props.handleAddTodo(title));
+    }
   }
 
   renderAddTodoDialog() {

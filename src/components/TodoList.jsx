@@ -23,13 +23,15 @@ class TodoList extends Component {
 
   renderTodo(todo, i) {
     return (
-      <TableRow key={i} selected={todo.get('completed')}>
+      <TableRow className="todo-row" key={i} selected={todo.get('completed')}>
         <TableRowColumn>{todo.get('title')}</TableRowColumn>
         <TableRowColumn>{todo.get('category')}</TableRowColumn>
         <TableRowColumn>{todo.get('assignee')}</TableRowColumn>
         <TableRowColumn>{todo.get('hours')}</TableRowColumn>
-        <TableRowColumn>{todo.get('percentComplete')}%</TableRowColumn>
-        <TableRowColumn>{todo.get('note')}%</TableRowColumn>
+        <TableRowColumn>
+          {todo.get('percentComplete') ? `${todo.get('percentComplete')}%` : ''}
+        </TableRowColumn>
+        <TableRowColumn>{todo.get('note')}</TableRowColumn>
       </TableRow>
     );
   }

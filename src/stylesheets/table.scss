@@ -40,5 +40,13 @@
 
 .new-todo-dialog-title{
   font-weight: 500 !important;
+}
 
+.todo-row{
+  td {
+    &:first-child{
+      text-align: left !important;
+    }
+    text-align: right !important;
+  }
 }
