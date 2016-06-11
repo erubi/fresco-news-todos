@@ -32,8 +32,8 @@ class TodoList extends Component {
     return (
       <TableRow className="todo-row" key={i} selected={todo.get('completed')}>
         <TableRowColumn>{todo.get('title')}</TableRowColumn>
-        <TableRowColumn>{todo.get('category')}</TableRowColumn>
-        <TableRowColumn>{todo.get('assignee')}</TableRowColumn>
+        <TableRowColumn>{todo.get('title')}</TableRowColumn>
+        <TableRowColumn>{todo.get('title')}</TableRowColumn>
         <TableRowColumn>{todo.get('hours')}</TableRowColumn>
         <TableRowColumn>
           {todo.get('percentComplete') ? `${todo.get('percentComplete')}%` : ''}
@@ -47,43 +47,39 @@ class TodoList extends Component {
     const { rows, todos } = this.props;
 
     return (
-      <Table className="todos-table">
-        <TableHeader className="table-header">
-          <TableHeaderNav handleAddTodo={this.handleAddTodo} title={'Title'} />
-          <TableRow>
-            <TableHeaderColumn>Title</TableHeaderColumn>
-            <TableHeaderColumn>Category</TableHeaderColumn>
-            <TableHeaderColumn>Status</TableHeaderColumn>
-            <TableHeaderColumn>Hours (n)</TableHeaderColumn>
-            <TableHeaderColumn>Completed (%)</TableHeaderColumn>
-            <TableHeaderColumn>Note</TableHeaderColumn>
-          </TableRow>
-        </TableHeader>
-
-        <TableBody className="table-body">
-          {todos.map((todo, i) => this.renderTodo(todo, i))}
-        </TableBody>
-
-        <TableFooter>
-          <TableRow>
-            <td />
-            <td />
-            <TableRowColumn>
-              <div className="footer-controls">
-                <span>Rows per page:</span>
-                <DropDownMenu value={rows} onChange={this.handleSetRows} className="rows-dropdown">
-                  <MenuItem value={5} primaryText="5" />
-                  <MenuItem value={10} primaryText="10" />
-                  <MenuItem value={15} primaryText="15" />
-                  <MenuItem value={20} primaryText="20" />
-                  <MenuItem value={25} primaryText="25" />
-                  <MenuItem value={30} primaryText="30" />
-                </DropDownMenu>
-              </div>
-            </TableRowColumn>
-          </TableRow>
-        </TableFooter>
-      </Table>
+      <div>
+        <Table className="todos-table-header">
+          <TableHeader className="table-header">
+            <TableHeaderNav handleAddTodo={this.handleAddTodo} title={'Title'} />
+            <TableRow>
+              <TableHeaderColumn>Title</TableHeaderColumn>
+              <TableHeaderColumn>Category</TableHeaderColumn>
+              <TableHeaderColumn>Status</TableHeaderColumn>
+              <TableHeaderColumn>Hours (n)</TableHeaderColumn>
+              <TableHeaderColumn>Completed (%)</TableHeaderColumn>
+              <TableHeaderColumn>Note</TableHeaderColumn>
+            </TableRow>
+          </TableHeader>
+        </Table>
+        <Table className="todos-table-body">
+          <TableBody className="table-body">
+            {todos.map((todo, i) => this.renderTodo(todo, i))}
+          </TableBody>
+        </Table>
+        <div className="todos-table-footer">
+          <div className="footer-controls">
+            <span>Rows per page:</span>
+            <DropDownMenu value={rows} onChange={this.handleSetRows} className="rows-dropdown">
+              <MenuItem value={5} primaryText="5" />
+              <MenuItem value={10} primaryText="10" />
+              <MenuItem value={15} primaryText="15" />
+              <MenuItem value={20} primaryText="20" />
+              <MenuItem value={25} primaryText="25" />
+              <MenuItem value={30} primaryText="30" />
+            </DropDownMenu>
+          </div>
+        </div>
+      </div>
     );
   }
 }
