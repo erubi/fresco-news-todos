@@ -5,6 +5,7 @@ import Immutable from 'immutable';
 import MenuItem from 'material-ui/MenuItem';
 import Popover from 'material-ui/Popover';
 import FlatButton from 'material-ui/FlatButton';
+import startCase from 'lodash/startCase';
 
 class TodoRow extends Component {
   constructor(props) {
@@ -24,7 +25,7 @@ class TodoRow extends Component {
     this.setState({ popOverOpen: false }, () => updateTodo(todo.get('id'), data));
   }
 
-  handlePopOverOpen = (event, attr) => {
+  handlePopOverOpen = (event, attr, type) => {
     // This prevents ghost click.
     event.preventDefault();
 
@@ -32,6 +33,7 @@ class TodoRow extends Component {
       popOverOpen: true,
       anchorEl: event.currentTarget,
       popOverAttr: attr,
+      popOverType: type,
     });
   };
 
@@ -41,18 +43,17 @@ class TodoRow extends Component {
     });
   };
 
-  renderPopOver = () => (
-    <Popover
-      open={this.state.popOverOpen}
-      className="todo-attr-popover"
-      anchorEl={this.state.anchorEl}
-      anchorOrigin={{ horizontal: 'left', vertical: 'bottom' }}
-      targetOrigin={{ horizontal: 'left', vertical: 'top' }}
-      onRequestClose={this.handleRequestClose}
-    >
-      <div>{this.state.popOverAttr}</div>
+  renderInputPopOver = (attr, inputType) => (
+    <div className="input-popover">
+      <h3>{startCase(attr)}</h3>
+
       <div className="input">
-        <input maxLength="10" ref="popOverInput" type="text"></input>
+        <input
+          maxLength="10"
+          autoFocus
+          ref="popOverInput"
+          type={inputType || 'text'}
+        />
       </div>
       <FlatButton
         key={'cancel'}
@@ -68,6 +69,18 @@ class TodoRow extends Component {
           [this.state.popOverAttr]: this.refs.popOverInput.value,
         })}
       />
+    </div>
+  );
+
+  renderPopOver = () => (
+    <Popover
+      open={this.state.popOverOpen}
+      anchorEl={this.state.anchorEl}
+      anchorOrigin={{ horizontal: 'left', vertical: 'bottom' }}
+      targetOrigin={{ horizontal: 'left', vertical: 'top' }}
+      onRequestClose={this.handleRequestClose}
+    >
+      {this.renderInputPopOver(this.state.popOverAttr, this.state.popOverType)}
     </Popover>
   );
 
@@ -104,15 +117,25 @@ class TodoRow extends Component {
           </div>
         </td>
         <td>
-          <div onClick={(e) => this.handlePopOverOpen(e, 'status')}>
+          <div onClick={(e) => this.handlePopOverOpen(e, 'status', 'text')}>
             {todo.get('status') || 'null'}
           </div>
         </td>
-        <td><div>{todo.get('hours') || 'null'}</div></td>
         <td>
-          <div>{todo.get('percentComplete') ? `${todo.get('percentComplete')}%` : 'null'}</div>
+          <div onClick={(e) => this.handlePopOverOpen(e, 'hours', 'number')}>
+            {todo.get('hours') || 'null'}
+          </div>
         </td>
-        <td><div>{todo.get('note') || 'null'}</div></td>
+        <td>
+          <div onClick={(e) => this.handlePopOverOpen(e, 'percentComplete', 'number')}>
+            {todo.get('percentComplete') ? `${todo.get('percentComplete')}%` : 'null'}
+          </div>
+        </td>
+        <td>
+          <div onClick={(e) => this.handlePopOverOpen(e, 'note', 'text')}>
+            {todo.get('note') || 'null'}
+          </div>
+        </td>
       </tr>
     );
   }
