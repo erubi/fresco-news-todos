@@ -6,6 +6,12 @@ const todo = (state, action) => {
   switch (action.type) {
     case todosActions.ADD_TODO:
       return fromJS({ id: action.id, ...action.data, completed: false });
+    case todosActions.TOGGLE_TODO:
+      if (state.get('id') !== action.id) {
+        return state;
+      }
+
+      return state.update('completed', v => !v);
     default:
       return state;
   }
@@ -18,6 +24,8 @@ const todos = (state = List(), action) => {
       return state.push(todo(undefined, action));
     case todosActions.REMOVE_TODO:
       return state.filterNot(t => t.get('id') === action.id);
+    case todosActions.TOGGLE_TODO:
+      return state.map(t => todo(t, action));
     default:
       return state;
   }
