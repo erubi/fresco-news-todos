@@ -12,31 +12,54 @@
 
 .material-icons {
   color: rgba(0, 0, 0, 0.54);
+  cursor: pointer;
+}
+
+table, thead, tbody, tr{
+  width: 100%;
+}
+
+table{
+  table-layout: fixed;
+}
+
+th, td{
+  padding: 20px 24px;
+  text-align: left;
 }
 
 .table-header-ctr{
-  nav{
-    height: 64px;
-    padding: 24px;
+  .title{
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 1.4;
+    color: rgba(0, 0, 0, 0.87);
+  }
 
-    .title{
-      font-weight: 500;
-      font-size: 20px;
-      line-height: 1.4;
-      color: rgba(0, 0, 0, 0.87);
-    }
+  .controls{
+    height: 64px;
 
     .material-icons {
       float: right;
-      margin-left: 25px;
+      &:first-child{
+        margin-left: 25px;
+      }
     }
   }
 
   .header-cells{
-    padding: 23px 21px;
+    th{
+      font-size: 12px;
+      color: rgba(0, 0, 0, 0.54);
+    }
   }
 }
 
+.tbody-ctr{
+  height: 480px;
+  overflow-y: scroll;
+  width: 100%;
+}
 
 .todos-table-footer{
   height: 56px;

@@ -1,9 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 import Immutable from 'immutable';
-import TableHeaderNav from './TableHeaderNav';
-import DropDownMenu from 'material-ui/DropDownMenu';
-import MenuItem from 'material-ui/MenuItem';
 import IconButton from 'material-ui/IconButton';
 
 class TodoList extends Component {
@@ -28,44 +25,35 @@ class TodoList extends Component {
     return (
       <tr key={i} selected={todo.get('completed')}>
         <td>
-          <IconButton
+          <i
             onClick={() => this.handleToggleTodo(todo.get('id'))}
-            iconClassName="material-icons"
+            className="material-icons"
           >
             {todo.get('completed') ? 'check_box' : 'check_box_outline_blank'}
-          </IconButton>
+          </i>
         </td>
         <td>{todo.get('title')}</td>
-        <td>{todo.get('category')}</td>
-        <td>{todo.get('status')}</td>
-        <td>{todo.get('houre')}</td>
+        <td>{todo.get('title')}</td>
+        <td>{todo.get('title')}</td>
+        <td>{todo.get('title')}</td>
         <td>
           {todo.get('percentComplete') ? `${todo.get('percentComplete')}%` : ''}
         </td>
-        <td>{todo.get('note')}</td>
+        <td>{todo.get('title')}</td>
       </tr>
     );
   }
 
   render() {
-    const { rows, todos } = this.props;
+    const { todos } = this.props;
 
     return (
-      <div>
-        {todos.map((todo, i) => this.renderTodo(todo, i))}
-        <div className="todos-table-footer">
-          <div className="footer-controls">
-            <span>Rows per page:</span>
-            <DropDownMenu value={rows} onChange={this.handleSetRows} className="rows-dropdown">
-              <MenuItem value={5} primaryText="5" />
-              <MenuItem value={10} primaryText="10" />
-              <MenuItem value={15} primaryText="15" />
-              <MenuItem value={20} primaryText="20" />
-              <MenuItem value={25} primaryText="25" />
-              <MenuItem value={30} primaryText="30" />
-            </DropDownMenu>
-          </div>
-        </div>
+      <div className="tbody-ctr">
+        <table>
+          <tbody>
+            {todos.map((todo, i) => this.renderTodo(todo, i))}
+          </tbody>
+        </table>
       </div>
     );
   }

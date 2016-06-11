@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { getVisibleTodos } from '../reducers';
 import { appActions, todosActions } from '../actions';
 import TableHeader from '../components/TableHeader';
+import TableBody from '../components/TableBody';
 
 class TodoListContainer extends Component {
   constructor(props) {
@@ -12,14 +13,22 @@ class TodoListContainer extends Component {
     this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
   }
 
+  handleAddTodo = (title) => {
+    this.props.addTodo({ title });
+  }
+
   render() {
+    const { todos, toggleAllTodos } = this.props;
+
     return (
       <div>
         <TableHeader
-          handleToggleAllTodos={this.handleToggleTodoAlLTodos}
+          handleToggleAllTodos={toggleAllTodos}
+          todos={todos}
           handleAddTodo={this.handleAddTodo}
           title={'Title'}
         />
+        <TableBody {...this.props} />
       </div>
     );
   }
@@ -35,12 +44,15 @@ function mapStateToProps(state) {
 
 TodoListContainer.propTypes = {
   todos: PropTypes.instanceOf(Immutable.List),
+  toggleAllTodos: PropTypes.func.isRequired,
+  addTodo: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, {
   addTodo: todosActions.addTodo,
   removeTodo: todosActions.removeTodo,
   toggleTodo: todosActions.toggleTodo,
+  toggleAllTodos: todosActions.toggleAllTodos,
   setRows: appActions.setRows,
 })(TodoListContainer);
 
