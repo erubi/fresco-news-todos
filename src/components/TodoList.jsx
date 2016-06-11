@@ -34,11 +34,11 @@ class TodoList extends Component {
         <TableRowColumn>{todo.get('title')}</TableRowColumn>
         <TableRowColumn>{todo.get('title')}</TableRowColumn>
         <TableRowColumn>{todo.get('title')}</TableRowColumn>
-        <TableRowColumn>{todo.get('hours')}</TableRowColumn>
+        <TableRowColumn>{todo.get('title')}</TableRowColumn>
         <TableRowColumn>
           {todo.get('percentComplete') ? `${todo.get('percentComplete')}%` : ''}
         </TableRowColumn>
-        <TableRowColumn>{todo.get('note')}</TableRowColumn>
+        <TableRowColumn>{todo.get('title')}</TableRowColumn>
       </TableRow>
     );
   }
@@ -61,11 +61,13 @@ class TodoList extends Component {
             </TableRow>
           </TableHeader>
         </Table>
-        <Table className="todos-table-body">
-          <TableBody className="table-body">
-            {todos.map((todo, i) => this.renderTodo(todo, i))}
-          </TableBody>
-        </Table>
+        <div className="table-body-ctr">
+          <Table className="todos-table-body">
+            <TableBody className="table-body">
+              {todos.map((todo, i) => this.renderTodo(todo, i))}
+            </TableBody>
+          </Table>
+        </div>
         <div className="todos-table-footer">
           <div className="footer-controls">
             <span>Rows per page:</span>

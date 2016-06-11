@@ -54,14 +54,16 @@
   }
 }
 
-.todos-table-body{
-  .todo-row{
-    display: block;
-  }
-  .table-body{
-    height: 480px !important;
-    max-height: 480px !important;
-    overflow-y: scroll;
+.table-body-ctr{
+  height: 480px !important;
+  max-height: 480px !important;
+  overflow-y: scroll;
+  .todos-table-body{
+    .table-body{
+      height: 480px !important;
+      max-height: 480px !important;
+      overflow-y: scroll;
+    }
   }
 }
 
