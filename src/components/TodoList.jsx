@@ -2,6 +2,8 @@ import React, { Component, PropTypes } from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 import Immutable from 'immutable';
 import TableHeaderNav from './TableHeaderNav';
+import DropDownMenu from 'material-ui/DropDownMenu';
+import MenuItem from 'material-ui/MenuItem';
 import {
   Table,
   TableBody,
@@ -9,6 +11,7 @@ import {
   TableHeaderColumn,
   TableRow,
   TableRowColumn,
+  TableFooter,
 } from 'material-ui/Table';
 
 class TodoList extends Component {
@@ -19,6 +22,10 @@ class TodoList extends Component {
 
   handleAddTodo = (title) => {
     this.props.addTodo({ title });
+  }
+
+  handleSetRows = (e, k, v) => {
+    this.props.setRows(v);
   }
 
   renderTodo(todo, i) {
@@ -40,25 +47,43 @@ class TodoList extends Component {
     const { todos } = this.props;
 
     return (
-      <div>
-        <Table>
-          <TableHeader className="table-header">
-            <TableHeaderNav handleAddTodo={this.handleAddTodo} title={'Title'} />
-            <TableRow>
-              <TableHeaderColumn>Title</TableHeaderColumn>
-              <TableHeaderColumn>Category</TableHeaderColumn>
-              <TableHeaderColumn>Status</TableHeaderColumn>
-              <TableHeaderColumn>Hours (n)</TableHeaderColumn>
-              <TableHeaderColumn>Completed (%)</TableHeaderColumn>
-              <TableHeaderColumn>Note</TableHeaderColumn>
-            </TableRow>
-          </TableHeader>
+      <Table className="todos-table">
+        <TableHeader className="table-header">
+          <TableHeaderNav handleAddTodo={this.handleAddTodo} title={'Title'} />
+          <TableRow>
+            <TableHeaderColumn>Title</TableHeaderColumn>
+            <TableHeaderColumn>Category</TableHeaderColumn>
+            <TableHeaderColumn>Status</TableHeaderColumn>
+            <TableHeaderColumn>Hours (n)</TableHeaderColumn>
+            <TableHeaderColumn>Completed (%)</TableHeaderColumn>
+            <TableHeaderColumn>Note</TableHeaderColumn>
+          </TableRow>
+        </TableHeader>
 
-          <TableBody>
-            {todos.map((todo, i) => this.renderTodo(todo, i))}
-          </TableBody>
-        </Table>
-      </div>
+        <TableBody className="table-body">
+          {todos.map((todo, i) => this.renderTodo(todo, i))}
+        </TableBody>
+
+        <TableFooter>
+          <TableRow>
+            <td />
+            <td />
+            <TableRowColumn>
+              <div className="footer-controls">
+                <span>Rows per page:</span>
+                <DropDownMenu onChange={this.handleSetRows} className="rows-dropdown">
+                  <MenuItem value={5} primaryText="5" />
+                  <MenuItem value={10} primaryText="10" />
+                  <MenuItem value={15} primaryText="15" />
+                  <MenuItem value={20} primaryText="20" />
+                  <MenuItem value={25} primaryText="25" />
+                  <MenuItem value={30} primaryText="30" />
+                </DropDownMenu>
+              </div>
+            </TableRowColumn>
+          </TableRow>
+        </TableFooter>
+      </Table>
     );
   }
 }
@@ -66,6 +91,7 @@ class TodoList extends Component {
 TodoList.propTypes = {
   todos: PropTypes.instanceOf(Immutable.List).isRequired,
   addTodo: PropTypes.func.isRequired,
+  setRows: PropTypes.func.isRequired,
   addTodoDialogOpen: PropTypes.bool,
   openAddTodoDialog: PropTypes.func,
   closeAddTodoDialog: PropTypes.func,

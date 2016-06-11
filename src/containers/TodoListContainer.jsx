@@ -3,7 +3,7 @@ import PureRenderMixin from 'react-addons-pure-render-mixin';
 import Immutable from 'immutable';
 import { connect } from 'react-redux';
 import { getVisibleTodos } from '../reducers';
-import { todosActions } from '../actions';
+import { appActions, todosActions } from '../actions';
 import TodoList from '../components/TodoList';
 
 class TodoListContainer extends Component {
@@ -33,5 +33,6 @@ TodoListContainer.propTypes = {
 export default connect(mapStateToProps, {
   addTodo: todosActions.addTodo,
   removeTodo: todosActions.removeTodo,
+  setRows: appActions.setRows,
 })(TodoListContainer);
 
