@@ -79,27 +79,29 @@ class TodoListContainer extends Component {
           selectedTodos={this.state.selectedTodos}
           title={'Title'}
         />
-        <TableHeader
-          handleToggleAllTodos={toggleAllTodos}
-          todos={todos}
-          scrollShadowVisible={this.state.scrollShadowVisible}
-          title={'Title'}
-        />
-        <TableBody
-          todos={todos}
-          selectedTodos={this.state.selectedTodos}
-          renderTodo={this.renderTodo}
-          showScrollShadow={(visible) => this.showScrollShadow(visible)}
-        />
-        <TableFooter
-          prevPage={prevPage}
-          nextPage={nextPage}
-          visibleNumTodos={todos.size}
-          totalNumTodos={totalNumTodos}
-          setRows={setRows}
-          rows={rows}
-          page={page}
-        />
+        <div className="todos-table-ctr">
+          <TableHeader
+            handleToggleAllTodos={toggleAllTodos}
+            todos={todos}
+            scrollShadowVisible={this.state.scrollShadowVisible}
+            title={'Title'}
+          />
+          <TableBody
+            todos={todos}
+            selectedTodos={this.state.selectedTodos}
+            renderTodo={this.renderTodo}
+            showScrollShadow={(visible) => this.showScrollShadow(visible)}
+          />
+          <TableFooter
+            prevPage={prevPage}
+            nextPage={nextPage}
+            visibleNumTodos={todos.size}
+            totalNumTodos={totalNumTodos}
+            setRows={setRows}
+            rows={rows}
+            page={page}
+          />
+        </div>
       </div>
     );
   }

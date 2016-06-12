@@ -55,6 +55,12 @@ th, td{
   text-align: left;
 }
 
+.todos-table-ctr{
+	@media only screen and (max-width: 600px) {
+    overflow-x: scroll;
+  }
+}
+
 .table-header-ctr{
   .shadow-tr{
     position: relative;
