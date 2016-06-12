@@ -16,7 +16,12 @@ class TodoListContainer extends Component {
     this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
     this.state = {
       selectedTodos: [],
+      scrollShadowVisible: false,
     };
+  }
+
+  showScrollShadow(visible) {
+    this.setState({ scrollShadowVisible: visible });
   }
 
   handleAddTodo = (title) => {
@@ -71,6 +76,7 @@ class TodoListContainer extends Component {
           handleToggleAllTodos={toggleAllTodos}
           handleRemoveTodos={(ids) => this.handleRemoveTodos(ids)}
           todos={todos}
+          scrollShadowVisible={this.state.scrollShadowVisible}
           handleAddTodo={this.handleAddTodo}
           selectedTodos={this.state.selectedTodos}
           title={'Title'}
@@ -79,6 +85,7 @@ class TodoListContainer extends Component {
           todos={todos}
           selectedTodos={this.state.selectedTodos}
           renderTodo={this.renderTodo}
+          showScrollShadow={(visible) => this.showScrollShadow(visible)}
         />
         <TableFooter
           prevPage={prevPage}

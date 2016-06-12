@@ -29,7 +29,17 @@ th, td{
 }
 
 .table-header-ctr{
-  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  .shadow-tr{
+    position: relative;
+    top: -1px;
+    height: 1px;
+    // box-shadow: 0px 4px 5px 0px rgba(0,0,0,0.5);
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.7);
+    background-color: #fafafa;
+    border: none;
+    display: block;
+    width: 1024px;
+  }
 
   .title{
     font-weight: 700;

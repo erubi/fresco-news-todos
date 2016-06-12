@@ -8,6 +8,23 @@ class TodoList extends Component {
     this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
   }
 
+  componentDidMount() {
+    document.getElementById('tbody-ctr').addEventListener('scroll', this.handleScroll);
+  }
+
+  componentWillUnmount() {
+    document.getElementById('tbody-ctr').removeEventListener('scroll', this.handleScroll);
+  }
+
+  handleScroll = (event) => {
+    const scrollTop = event.srcElement.scrollTop;
+    if (scrollTop === 0) {
+      this.props.showScrollShadow(false);
+    } else {
+      this.props.showScrollShadow(true);
+    }
+  }
+
   isSelected(todoId) {
     return this.props.selectedTodos.includes(todoId);
   }
@@ -16,7 +33,7 @@ class TodoList extends Component {
     const { todos, renderTodo } = this.props;
 
     return (
-      <div className="tbody-ctr">
+      <div id="tbody-ctr" className="tbody-ctr">
         <table>
           <tbody>
             {todos.map((todo, i) => renderTodo(i, todo, this.isSelected(todo.get('id'))))}
@@ -31,6 +48,7 @@ TodoList.propTypes = {
   todos: PropTypes.instanceOf(Immutable.List).isRequired,
   selectedTodos: PropTypes.array.isRequired,
   renderTodo: PropTypes.func.isRequired,
+  showScrollShadow: PropTypes.func.isRequired,
 };
 
 export default TodoList;

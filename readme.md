@@ -1,4 +1,4 @@
 TODO:
-* mobile/responsive version
 * scrollable shadow
+* mobile/responsive version
 * misc style updates

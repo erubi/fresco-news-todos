@@ -92,7 +92,11 @@ class TableHeaderNav extends Component {
   }
 
   render() {
-    const { todos, handleToggleAllTodos } = this.props;
+    const {
+      todos,
+      handleToggleAllTodos,
+      scrollShadowVisible,
+    } = this.props;
 
     return (
       <table>
@@ -112,6 +116,7 @@ class TableHeaderNav extends Component {
             <th className="note-cell">Note</th>
           </tr>
           {this.renderAddTodoDialog()}
+          <tr className={`shadow-tr ${scrollShadowVisible ? '' : 'no-display'}`} />
         </thead>
       </table>
     );
@@ -120,6 +125,7 @@ class TableHeaderNav extends Component {
 
 TableHeaderNav.propTypes = {
   title: PropTypes.string.isRequired,
+  scrollShadowVisible: PropTypes.bool.isRequired,
   todos: PropTypes.instanceOf(Immutable.List).isRequired,
   handleAddTodo: PropTypes.func.isRequired,
   handleToggleAllTodos: PropTypes.func.isRequired,
