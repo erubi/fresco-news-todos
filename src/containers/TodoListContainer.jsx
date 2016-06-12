@@ -23,6 +23,12 @@ class TodoListContainer extends Component {
     this.props.addTodo({ title });
   }
 
+  handleRemoveTodos = (ids) => {
+    if (!ids) return null;
+
+    return this.setState({ selectedTodos: [] }, () => this.props.removeTodos(ids));
+  }
+
   selectTodo(todoId) {
     let selected;
     if (!todoId) return null;
@@ -63,6 +69,7 @@ class TodoListContainer extends Component {
       <div>
         <TableHeader
           handleToggleAllTodos={toggleAllTodos}
+          handleRemoveTodos={(ids) => this.handleRemoveTodos(ids)}
           todos={todos}
           handleAddTodo={this.handleAddTodo}
           selectedTodos={this.state.selectedTodos}
@@ -102,6 +109,7 @@ TodoListContainer.propTypes = {
   totalNumTodos: PropTypes.number.isRequired,
   todos: PropTypes.instanceOf(Immutable.List),
   toggleTodo: PropTypes.func.isRequired,
+  removeTodos: PropTypes.func.isRequired,
   updateTodo: PropTypes.func.isRequired,
   toggleAllTodos: PropTypes.func.isRequired,
   addTodo: PropTypes.func.isRequired,
@@ -113,6 +121,7 @@ TodoListContainer.propTypes = {
 export default connect(mapStateToProps, {
   addTodo: todosActions.addTodo,
   removeTodo: todosActions.removeTodo,
+  removeTodos: todosActions.removeTodos,
   updateTodo: todosActions.updateTodo,
   toggleTodo: todosActions.toggleTodo,
   toggleAllTodos: todosActions.toggleAllTodos,

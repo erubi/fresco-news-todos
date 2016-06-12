@@ -58,7 +58,7 @@ class TableHeaderNav extends Component {
   }
 
   renderControls = () => {
-    const { title, selectedTodos } = this.props;
+    const { title, selectedTodos, handleRemoveTodos } = this.props;
     const numSelected = selectedTodos.length;
 
     if (numSelected) {
@@ -69,7 +69,12 @@ class TableHeaderNav extends Component {
           </th>
           <th>
             <FontIcon className="material-icons">more_vert</FontIcon>
-            <FontIcon className="material-icons" onClick={this.openNewTodoDialog}>add</FontIcon>
+            <FontIcon
+              className="material-icons"
+              onClick={() => handleRemoveTodos(selectedTodos)}
+            >
+              delete
+            </FontIcon>
           </th>
         </tr>
       );
@@ -118,6 +123,7 @@ TableHeaderNav.propTypes = {
   todos: PropTypes.instanceOf(Immutable.List).isRequired,
   handleAddTodo: PropTypes.func.isRequired,
   handleToggleAllTodos: PropTypes.func.isRequired,
+  handleRemoveTodos: PropTypes.func.isRequired,
   selectedTodos: PropTypes.array.isRequired,
 };
 
