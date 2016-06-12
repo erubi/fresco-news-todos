@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 import Immutable from 'immutable';
-import remove from 'lodash/remove';
+import filter from 'lodash/filter';
 import { connect } from 'react-redux';
 import { getVisibleTodos } from '../reducers';
 import { appActions, todosActions } from '../actions';
@@ -29,17 +29,18 @@ class TodoListContainer extends Component {
     const { selectedTodos } = this.state;
 
     if (selectedTodos.includes(todoId)) {
-      selected = remove(selectedTodos, todoId);
+      selected = filter(selectedTodos, (id) => id !== todoId);
     } else {
       selected = selectedTodos.concat(todoId);
     }
     return this.setState({ selectedTodos: selected });
   }
 
-  renderTodo = (key, todo) => (
+  renderTodo = (key, todo, selected) => (
     <TodoRow
       key={key}
       todo={todo}
+      selected={selected}
       toggleTodo={this.props.toggleTodo}
       updateTodo={this.props.updateTodo}
       selectTodo={(todoId) => this.selectTodo(todoId)}
@@ -67,7 +68,11 @@ class TodoListContainer extends Component {
           selectedTodos={this.state.selectedTodos}
           title={'Title'}
         />
-        <TableBody todos={todos} renderTodo={this.renderTodo} />
+        <TableBody
+          todos={todos}
+          selectedTodos={this.state.selectedTodos}
+          renderTodo={this.renderTodo}
+        />
         <TableFooter
           prevPage={prevPage}
           nextPage={nextPage}

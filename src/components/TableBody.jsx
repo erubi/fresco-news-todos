@@ -8,6 +8,10 @@ class TodoList extends Component {
     this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
   }
 
+  isSelected(todoId) {
+    return this.props.selectedTodos.includes(todoId);
+  }
+
   render() {
     const { todos, renderTodo } = this.props;
 
@@ -15,7 +19,7 @@ class TodoList extends Component {
       <div className="tbody-ctr">
         <table>
           <tbody>
-            {todos.map((todo, i) => renderTodo(i, todo))}
+            {todos.map((todo, i) => renderTodo(i, todo, this.isSelected(todo.get('id'))))}
           </tbody>
         </table>
       </div>
@@ -25,6 +29,7 @@ class TodoList extends Component {
 
 TodoList.propTypes = {
   todos: PropTypes.instanceOf(Immutable.List).isRequired,
+  selectedTodos: PropTypes.array.isRequired,
   renderTodo: PropTypes.func.isRequired,
 };
 

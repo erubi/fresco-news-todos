@@ -34,7 +34,6 @@ th, td{
   .title{
     font-weight: 700;
     font-size: 20px;
-    line-height: 1.4;
     color: rgba(0, 0, 0, 0.87);
   }
 
@@ -44,6 +43,12 @@ th, td{
 
   .selected-todos{
     background-color: rgba(0, 71, 187, 0.12);
+
+    .title{
+      font-weight: 500;
+      font-size: 16px;
+      color: #0047bb;
+    }
   }
 
   .controls{
@@ -80,6 +85,10 @@ th, td{
     height: 48px;
     border-top: 1px solid rgba(0, 0, 0, 0.12);
     border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+
+    &.selected-todo{
+      background-color: #ededed;
+    }
 
     td{
       > div{

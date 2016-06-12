@@ -59,15 +59,14 @@ class TableHeaderNav extends Component {
 
   renderControls = () => {
     const { title, selectedTodos } = this.props;
-    if (selectedTodos.length) {
+    const numSelected = selectedTodos.length;
+
+    if (numSelected) {
       return (
         <tr className="controls selected-todos">
-          <th className="title">{title}</th>
-          <th />
-          <th />
-          <th />
-          <th />
-          <th />
+          <th colSpan={6} className="title">
+            {`${numSelected} item${numSelected > 1 ? "'s" : ''} selected`}
+          </th>
           <th>
             <FontIcon className="material-icons">more_vert</FontIcon>
             <FontIcon className="material-icons" onClick={this.openNewTodoDialog}>add</FontIcon>
@@ -78,12 +77,7 @@ class TableHeaderNav extends Component {
 
     return (
       <tr className="controls">
-        <th className="title">{title}</th>
-        <th />
-        <th />
-        <th />
-        <th />
-        <th />
+        <th colSpan={6} className="title">{title}</th>
         <th>
           <FontIcon className="material-icons">more_vert</FontIcon>
           <FontIcon className="material-icons" onClick={this.openNewTodoDialog}>add</FontIcon>

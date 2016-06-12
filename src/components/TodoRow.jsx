@@ -95,10 +95,14 @@ class TodoRow extends Component {
   );
 
   render() {
-    const { todo, selectTodo } = this.props;
+    const { todo, selectTodo, selected } = this.props;
+    const className = selected ? 'selected-todo' : '';
 
     return (
-      <tr onClick={() => selectTodo(todo.get('id'))}>
+      <tr
+        className={className}
+        onClick={() => selectTodo(todo.get('id'))}
+      >
         <td>
           {this.renderPopOver()}
           <div>
@@ -151,6 +155,7 @@ TodoRow.propTypes = {
   toggleTodo: PropTypes.func.isRequired,
   updateTodo: PropTypes.func.isRequired,
   selectTodo: PropTypes.func.isRequired,
+  selected: PropTypes.bool.isRequired,
 };
 
 export default TodoRow;
