@@ -1,4 +1,1 @@
-TODO:
-* scrollable shadow
-* mobile/responsive version
-* misc style updates
+Material todos for Fresco News Interview
