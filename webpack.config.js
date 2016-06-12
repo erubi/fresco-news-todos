@@ -1,5 +1,7 @@
 const webpack = require('webpack');
 const path = require('path');
+const autoprefixer = require('autoprefixer');
+const postcssNormalize = require('postcss-normalize');
 
 module.exports = {
   entry: [
@@ -23,16 +25,13 @@ module.exports = {
     ],
   },
   postcss() {
-    return [
-      require('autoprefixer'),
-      require('postcss-normalize'),
-    ];
+    return [autoprefixer, postcssNormalize];
   },
   resolve: {
     extensions: ['', '.js', '.jsx', '.scss'],
   },
   output: {
-    path: __dirname + '/dist',
+    path: `${__dirname}/dist`,
     publicPath: '/dist/',
     filename: 'bundle.js',
   },

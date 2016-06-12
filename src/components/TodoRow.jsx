@@ -16,7 +16,8 @@ class TodoRow extends Component {
     };
   }
 
-  handleToggleTodo = (todoId) => {
+  handleToggleTodo = (e, todoId) => {
+    e.stopPropagation();
     this.props.toggleTodo(todoId);
   }
 
@@ -26,8 +27,8 @@ class TodoRow extends Component {
   }
 
   handlePopOverOpen = (event, attr, type) => {
-    // This prevents ghost click.
     event.preventDefault();
+    event.stopPropagation();
 
     this.setState({
       popOverOpen: true,
@@ -98,7 +99,7 @@ class TodoRow extends Component {
     if (todo.get('completed')) {
       return (
         <i
-          onClick={() => this.handleToggleTodo(todo.get('id'))}
+          onClick={(e) => this.handleToggleTodo(e, todo.get('id'))}
           style={{ color: '#0047bb' }}
           className="material-icons"
         >
@@ -109,7 +110,7 @@ class TodoRow extends Component {
 
     return (
       <i
-        onClick={() => this.handleToggleTodo(todo.get('id'))}
+        onClick={(e) => this.handleToggleTodo(e, todo.get('id'))}
         className="material-icons"
       >
         check_box_outline_blank
