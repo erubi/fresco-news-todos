@@ -34,6 +34,20 @@ describe('todo reducer', () => {
     expect(nextState).to.equal(fromJS([]));
   });
 
+  it('handles REMOVE_TODOS', () => {
+    const initialState = reducer(fromJS(
+      [
+        { id: '231', completed: false },
+        { id: '232', completed: false },
+        { id: '233', completed: false },
+        { id: '234', completed: false },
+      ]), {});
+    const action = todosActions.removeTodos(['231', '232', '234']);
+    const nextState = reducer(initialState, action);
+
+    expect(nextState).to.equal(fromJS([{ id: '233', completed: false }]));
+  });
+
   it('handles TOGGLE_TODO', () => {
     const initialState = reducer(fromJS([{ id: '231', completed: false }]), {});
     const action = todosActions.toggleTodo('231');

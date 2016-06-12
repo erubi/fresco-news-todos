@@ -30,6 +30,8 @@ const todos = (state = List(), action) => {
       return state.push(todo(undefined, action));
     case todosActions.REMOVE_TODO:
       return state.filterNot(t => t.get('id') === action.id);
+    case todosActions.REMOVE_TODOS:
+      return state.filterNot(t => action.ids.includes(t.get('id')));
     case todosActions.TOGGLE_TODO:
       return state.map(t => todo(t, action));
     case todosActions.TOGGLE_ALL_TODOS:
