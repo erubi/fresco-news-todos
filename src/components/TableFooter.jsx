@@ -46,7 +46,10 @@ class TableFooter extends Component {
           </DropDownMenu>
 
           <div className="page-label">
-            {`${i || 1}-${j > totalNumTodos ? visibleNumTodos + i : j} of ${totalNumTodos}`}
+            {`
+              ${totalNumTodos ? (i || 1) : 0}-${j > totalNumTodos ? visibleNumTodos + i : j}
+              of ${totalNumTodos}
+            `}
           </div>
           <i onClick={prevPage} className="material-icons">chevron_left</i>
           <i onClick={nextPage} className="material-icons">chevron_right</i>

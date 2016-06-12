@@ -94,6 +94,29 @@ class TodoRow extends Component {
     </Popover>
   );
 
+  renderCheckBox(todo) {
+    if (todo.get('completed')) {
+      return (
+        <i
+          onClick={() => this.handleToggleTodo(todo.get('id'))}
+          style={{ color: '#0047bb' }}
+          className="material-icons"
+        >
+          check_box
+        </i>
+      );
+    }
+
+    return (
+      <i
+        onClick={() => this.handleToggleTodo(todo.get('id'))}
+        className="material-icons"
+      >
+        check_box_outline_blank
+      </i>
+    );
+  }
+
   render() {
     const { todo, selectTodo, selected } = this.props;
     const className = selected ? 'selected-todo' : '';
@@ -106,12 +129,7 @@ class TodoRow extends Component {
         <td>
           {this.renderPopOver()}
           <div>
-            <i
-              onClick={() => this.handleToggleTodo(todo.get('id'))}
-              className="material-icons"
-            >
-              {todo.get('completed') ? 'check_box' : 'check_box_outline_blank'}
-            </i>
+            {this.renderCheckBox(todo)}
           </div>
         </td>
         <td>

@@ -3,8 +3,6 @@ const path = require('path');
 
 module.exports = {
   entry: [
-    'webpack-dev-server/client?http://localhost:8080',
-    'webpack/hot/only-dev-server',
     'babel-polyfill',
     './src/index.js',
   ],
@@ -14,7 +12,7 @@ module.exports = {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         include: path.join(__dirname, 'src'),
-        loader: 'react-hot!babel',
+        loader: 'babel',
       },
       {
         test: /\.scss$/,
@@ -43,7 +41,7 @@ module.exports = {
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.DefinePlugin({ 'process.env.NODE_ENV': JSON.stringify('development') }),
+    new webpack.DefinePlugin({ 'process.env.NODE_ENV': JSON.stringify('production') }),
   ],
 };
 
