@@ -3,6 +3,7 @@
 html, body {
   height: 100%;
   width: 100%;
+	overflow: hidden;
 }
 
 body {
@@ -20,6 +21,16 @@ body {
 	border-radius: 2px;
 	background-color: #fafafa;
 	box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.24), 0 0 2px 0 rgba(0, 0, 0, 0.12);
+
+  @media only screen and (max-width: 600px) {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    height: 100%;
+    width: 100%;
+		overflow-x: scroll;
+  }
 }
 
 span[type="button"]{

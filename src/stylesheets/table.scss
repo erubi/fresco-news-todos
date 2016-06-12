@@ -70,10 +70,13 @@ th, td{
 
   th{
     padding: 20px 24px;
+		box-sizing: border-box;
     &:first-child{
-      width: 20px;
-      box-sizing: border-box;
+      width: 44px;
     }
+		@media only screen and (max-width: 600px) {
+			width: 140px;
+		}
   }
 
   .header-cells{
@@ -89,6 +92,9 @@ th, td{
   overflow-y: scroll;
   width: 100%;
   font-size: 14px;
+	@media only screen and (max-width: 600px) {
+		overflow-y: visible;
+	}
 
   .cell-text{
     display: inline-block;
@@ -105,18 +111,21 @@ th, td{
     }
 
     td{
-      &:first-child{
-        width: 44px;
-      }
       display: table-cell;
       vertical-align: middle;
       padding: 0 24px;
       height: 48px !important;
       box-sizing: border-box;
       cursor: pointer;
-      i{
-        vertical-align: middle;
-      }
+			&:first-child{
+				width: 44px;
+			}
+			i{
+				vertical-align: middle;
+			}
+			@media only screen and (max-width: 600px) {
+				width: 140px;
+			}
     }
   }
 }
