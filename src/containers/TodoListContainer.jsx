@@ -5,6 +5,7 @@ import filter from 'lodash/filter';
 import { connect } from 'react-redux';
 import { getVisibleTodos } from '../reducers';
 import { appActions, todosActions } from '../actions';
+import Header from '../components/Header';
 import TableHeader from '../components/TableHeader';
 import TableBody from '../components/TableBody';
 import TableFooter from '../components/TableFooter';
@@ -72,13 +73,16 @@ class TodoListContainer extends Component {
 
     return (
       <div>
-        <TableHeader
-          handleToggleAllTodos={toggleAllTodos}
+        <Header
           handleRemoveTodos={(ids) => this.handleRemoveTodos(ids)}
-          todos={todos}
-          scrollShadowVisible={this.state.scrollShadowVisible}
           handleAddTodo={this.handleAddTodo}
           selectedTodos={this.state.selectedTodos}
+          title={'Title'}
+        />
+        <TableHeader
+          handleToggleAllTodos={toggleAllTodos}
+          todos={todos}
+          scrollShadowVisible={this.state.scrollShadowVisible}
           title={'Title'}
         />
         <TableBody
