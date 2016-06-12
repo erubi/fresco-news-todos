@@ -107,19 +107,13 @@ th, td{
     td{
       &:first-child{
         width: 44px;
-        >div{
-          width: 44px;
-        }
       }
-      > div{
-        display: table-cell;
-        vertical-align: middle;
-        padding: 0 24px;
-        height: 48px !important;
-        box-sizing: border-box;
-        cursor: pointer;
-      }
-
+      display: table-cell;
+      vertical-align: middle;
+      padding: 0 24px;
+      height: 48px !important;
+      box-sizing: border-box;
+      cursor: pointer;
       i{
         vertical-align: middle;
       }
