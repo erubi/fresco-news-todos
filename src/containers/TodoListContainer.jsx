@@ -21,6 +21,23 @@ class TodoListContainer extends Component {
     };
   }
 
+  componentDidMount() {
+    if (window.matchMedia) {
+      const mq = window.matchMedia('(max-width: 500px)');
+      mq.addListener(() => this.onWidthChange(mq));
+      this.onWidthChange(mq);
+    }
+  }
+
+  onWidthChange(mq) {
+    const { setMobile } = this.props;
+    if (mq.matches) {
+      setMobile(true);
+    } else {
+      setMobile(false);
+    }
+  }
+
   showScrollShadow(visible) {
     this.setState({ scrollShadowVisible: visible });
   }
@@ -69,7 +86,35 @@ class TodoListContainer extends Component {
       nextPage,
       prevPage,
       totalNumTodos,
+      mobile,
     } = this.props;
+
+    if (mobile) {
+      return (
+        <div>
+          <Header
+            handleRemoveTodos={(ids) => this.handleRemoveTodos(ids)}
+            handleAddTodo={this.handleAddTodo}
+            selectedTodos={this.state.selectedTodos}
+            title={'Title'}
+          />
+          <div className="todos-table-ctr">
+            <TableHeader
+              handleToggleAllTodos={toggleAllTodos}
+              todos={todos}
+              scrollShadowVisible={this.state.scrollShadowVisible}
+              title={'Title'}
+            />
+            <TableBody
+              todos={todos}
+              selectedTodos={this.state.selectedTodos}
+              renderTodo={this.renderTodo}
+              showScrollShadow={(visible) => this.showScrollShadow(visible)}
+            />
+          </div>
+        </div>
+      );
+    }
 
     return (
       <div>
@@ -113,12 +158,14 @@ function mapStateToProps(state) {
     totalNumTodos: state.get('todos').size,
     rows: state.getIn(['app', 'rows']),
     page: state.getIn(['app', 'page']),
+    mobile: state.getIn(['app', 'mobile']),
   };
 }
 
 TodoListContainer.propTypes = {
   rows: PropTypes.number.isRequired,
   page: PropTypes.number.isRequired,
+  mobile: PropTypes.bool.isRequired,
   totalNumTodos: PropTypes.number.isRequired,
   todos: PropTypes.instanceOf(Immutable.List),
   toggleTodo: PropTypes.func.isRequired,
@@ -129,6 +176,7 @@ TodoListContainer.propTypes = {
   setRows: PropTypes.func.isRequired,
   prevPage: PropTypes.func.isRequired,
   nextPage: PropTypes.func.isRequired,
+  setMobile: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, {
@@ -141,5 +189,6 @@ export default connect(mapStateToProps, {
   setRows: appActions.setRows,
   prevPage: appActions.prevPage,
   nextPage: appActions.nextPage,
+  setMobile: appActions.setMobile,
 })(TodoListContainer);
 

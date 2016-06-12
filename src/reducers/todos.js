@@ -46,6 +46,10 @@ const todos = (state = List(), action) => {
 export default todos;
 
 export const getVisibleTodos = (todosState, appState) => {
+  const mobile = appState.get('mobile');
+  if (mobile) {
+    return todosState;
+  }
   const rows = appState.get('rows');
   const page = appState.get('page');
   const i = rows * page;

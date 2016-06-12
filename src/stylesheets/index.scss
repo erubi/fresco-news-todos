@@ -4,6 +4,9 @@ html, body {
   height: 100%;
   width: 100%;
 	overflow: hidden;
+	@media only screen and (max-width: 600px) {
+    overflow-y: scroll;
+  }
 }
 
 body {
@@ -16,8 +19,8 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
   width: 1024px;
-  // height: 656px;
-  max-height: 696px;
+  height: 667px;
+  box-sizing: border-box;
 	border-radius: 2px;
 	background-color: #fafafa;
 	box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.24), 0 0 2px 0 rgba(0, 0, 0, 0.12);
@@ -29,6 +32,7 @@ body {
     transform: none;
     height: 100%;
     width: 100%;
+    box-shadow: none;
   }
 }
 

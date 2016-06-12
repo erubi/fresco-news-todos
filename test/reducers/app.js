@@ -7,7 +7,7 @@ describe('app reducer', () => {
   it('returns the initial state', () => {
     expect(
       reducer(undefined, {})
-		).to.equal(fromJS({ page: 0, rows: 10 }));
+		).to.equal(fromJS({ page: 0, rows: 10, mobile: false }));
   });
 
   it('handles NEXT_PAGE', () => {
@@ -15,7 +15,7 @@ describe('app reducer', () => {
     const action = { type: appActions.NEXT_PAGE };
     const nextState = reducer(initialState, action);
 
-    expect(nextState).to.equal(fromJS({ page: 1, rows: 10 }));
+    expect(nextState).to.equal(fromJS({ page: 1, rows: 10, mobile: false }));
   });
 
   it('handles PREV_PAGE', () => {
@@ -29,13 +29,20 @@ describe('app reducer', () => {
     const initialState = reducer(undefined, {});
     const action = appActions.prevPage();
     const nextState = reducer(initialState, action);
-    expect(nextState).to.equal(fromJS({ page: 0, rows: 10 }));
+    expect(nextState).to.equal(fromJS({ page: 0, rows: 10, mobile: false }));
   });
 
   it('handles SET_ROWS', () => {
     const initialState = reducer(undefined, {});
     const action = appActions.setRows(20);
     const nextState = reducer(initialState, action);
-    expect(nextState).to.equal(fromJS({ page: 0, rows: 20 }));
+    expect(nextState).to.equal(fromJS({ page: 0, rows: 20, mobile: false }));
+  });
+
+  it('handles SET_MOBILE', () => {
+    const initialState = reducer(undefined, {});
+    const action = appActions.setMobile(true);
+    const nextState = reducer(initialState, action);
+    expect(nextState).to.equal(fromJS({ page: 0, rows: 10, mobile: true }));
   });
 });

@@ -1,6 +1,7 @@
 export const NEXT_PAGE = 'NEXT_PAGE';
 export const PREV_PAGE = 'PREV_PAGE';
 export const SET_ROWS = 'SET_ROWS';
+export const SET_MOBILE = 'SET_MOBILE';
 
 export const nextPage = () => (dispatch, getState) => {
   const page = getState().getIn(['app', 'page']);
@@ -23,4 +24,9 @@ export const prevPage = () => ({
 export const setRows = (num) => ({
   type: SET_ROWS,
   num,
+});
+
+export const setMobile = (mobile) => ({
+  type: SET_MOBILE,
+  mobile,
 });
