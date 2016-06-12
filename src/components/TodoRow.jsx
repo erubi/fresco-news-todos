@@ -51,6 +51,7 @@ class TodoRow extends Component {
       <div className="input">
         <input
           maxLength="10"
+          placeholder={inputType === 'number' ? 'Input number here' : 'Input text here'}
           autoFocus
           ref="popOverInput"
           type={inputType || 'text'}
@@ -131,24 +132,36 @@ class TodoRow extends Component {
           {this.renderPopOver()}
           {this.renderCheckBox(todo)}
         </td>
-        <td onClick={(e) => this.handlePopOverOpen(e, 'title', 'text')}>
-          {todo.get('title')}
+        <td>
+          <span onClick={(e) => this.handlePopOverOpen(e, 'title', 'text')}>
+            {todo.get('title')}
+          </span>
         </td>
-        <td onClick={(e) => this.handlePopOverOpen(e, 'category', 'menu')}>
-          <span className="cell-text">{todo.get('category') || 'null'}</span>
-          <i className="material-icons">arrow_drop_down</i>
+        <td>
+          <span onClick={(e) => this.handlePopOverOpen(e, 'category', 'menu')}>
+            <span className="cell-text">{todo.get('category') || 'null'}</span>
+            <i className="material-icons">arrow_drop_down</i>
+          </span>
         </td>
-        <td onClick={(e) => this.handlePopOverOpen(e, 'status', 'text')}>
-          {todo.get('status') || 'null'}
+        <td>
+          <span onClick={(e) => this.handlePopOverOpen(e, 'status', 'text')}>
+            {todo.get('status') || 'null'}
+          </span>
         </td>
-        <td onClick={(e) => this.handlePopOverOpen(e, 'hours', 'number')}>
-          {todo.get('hours') || 'null'}
+        <td>
+          <span onClick={(e) => this.handlePopOverOpen(e, 'hours', 'number')}>
+            {todo.get('hours') || 'null'}
+          </span>
         </td>
-        <td onClick={(e) => this.handlePopOverOpen(e, 'percentComplete', 'number')}>
-          {todo.get('percentComplete') ? `${todo.get('percentComplete')}%` : 'null'}
+        <td>
+          <span onClick={(e) => this.handlePopOverOpen(e, 'percentComplete', 'number')}>
+            {todo.get('percentComplete') ? `${todo.get('percentComplete')}%` : 'null'}
+          </span>
         </td>
-        <td onClick={(e) => this.handlePopOverOpen(e, 'note', 'text')}>
-          {todo.get('note') || 'null'}
+        <td>
+          <span onClick={(e) => this.handlePopOverOpen(e, 'note', 'text')}>
+            {todo.get('note') || 'null'}
+          </span>
         </td>
       </tr>
     );
