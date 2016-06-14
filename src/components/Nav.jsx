@@ -26,7 +26,7 @@ class Nav extends Component {
     const title = this.refs.newTodoTitle.value;
 
     if (title && title.length) {
-      this.setState({ newTodoDialogOpen: false }, () => this.props.addTodo({title: title}));
+      this.setState({ newTodoDialogOpen: false }, () => this.props.addTodo({ title }));
     }
   }
 
