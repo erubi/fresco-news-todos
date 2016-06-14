@@ -7,7 +7,7 @@ import Popover from 'material-ui/Popover';
 import FlatButton from 'material-ui/FlatButton';
 import startCase from 'lodash/startCase';
 
-class TodoRow extends Component {
+class ListRow extends Component {
   constructor(props) {
     super(props);
     this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
@@ -168,7 +168,7 @@ class TodoRow extends Component {
   }
 }
 
-TodoRow.propTypes = {
+ListRow.propTypes = {
   todo: PropTypes.instanceOf(Immutable.Map),
   toggleTodo: PropTypes.func.isRequired,
   updateTodo: PropTypes.func.isRequired,
@@ -176,5 +176,5 @@ TodoRow.propTypes = {
   selected: PropTypes.bool.isRequired,
 };
 
-export default TodoRow;
+export default ListRow;
 

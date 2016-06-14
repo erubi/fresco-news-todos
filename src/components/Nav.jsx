@@ -1,0 +1,98 @@
+import React, { Component, PropTypes } from 'react';
+import PureRenderMixin from 'react-addons-pure-render-mixin';
+import FontIcon from 'material-ui/FontIcon';
+import Dialog from 'material-ui/Dialog';
+import FlatButton from 'material-ui/FlatButton';
+
+class Header extends Component {
+  constructor(props) {
+    super(props);
+    this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
+    this.state = {
+      newTodoDialogOpen: false,
+    };
+  }
+
+  openNewTodoDialog = () => {
+    this.setState({ newTodoDialogOpen: true });
+  }
+
+  handleAddTodo = () => {
+    const title = this.refs.newTodoTitle.value;
+    if (title && title.length) {
+      this.setState({ newTodoDialogOpen: false }, this.props.handleAddTodo(title));
+    }
+  }
+
+  renderAddTodoDialog() {
+    const actions = [
+      <FlatButton
+        key={'cancel'}
+        label="Cancel"
+        style={{ color: '#0047bb' }}
+        onTouchTap={() => this.setState({ newTodoDialogOpen: false })}
+      />,
+      <FlatButton
+        key={'save'}
+        label="Save"
+        style={{ color: '#0047bb' }}
+        onTouchTap={this.handleAddTodo}
+      />,
+    ];
+
+    return (
+      <Dialog
+        title="Title"
+        contentClassName={'new-todo-dialog'}
+        titleClassName={'new-todo-dialog-title'}
+        actions={actions}
+        modal
+        open={this.state.newTodoDialogOpen}
+      >
+        <div className="input">
+          <input maxLength="10" ref="newTodoTitle" type="text"></input>
+        </div>
+      </Dialog>
+    );
+  }
+
+  render = () => {
+    const { title, selectedTodos, handleRemoveTodos } = this.props;
+    const numSelected = selectedTodos.length;
+
+    if (numSelected) {
+      return (
+        <div className="header-ctr selected-todos">
+          <span className="selected-text">
+            {`${numSelected} item${numSelected > 1 ? "'s" : ''} selected`}
+          </span>
+          <FontIcon className="material-icons">more_vert</FontIcon>
+          <FontIcon
+            className="material-icons"
+            onClick={() => handleRemoveTodos(selectedTodos)}
+          >
+            delete
+          </FontIcon>
+        </div>
+      );
+    }
+
+    return (
+      <div className="header-ctr">
+        {this.renderAddTodoDialog()}
+        <span className="title">{title}</span>
+        <FontIcon className="material-icons">more_vert</FontIcon>
+        <FontIcon className="material-icons" onClick={this.openNewTodoDialog}>add</FontIcon>
+      </div>
+    );
+  }
+}
+
+Header.propTypes = {
+  title: PropTypes.string.isRequired,
+  handleAddTodo: PropTypes.func.isRequired,
+  handleRemoveTodos: PropTypes.func.isRequired,
+  selectedTodos: PropTypes.array.isRequired,
+};
+
+export default Header;
