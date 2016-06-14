@@ -21,10 +21,12 @@ class Nav extends Component {
     this.setState({ newTodoDialogOpen: true });
   }
 
-  handleAddTodo = () => {
+  handleAddTodo = (e) => {
+    if (e) e.preventDefault();
     const title = this.refs.newTodoTitle.value;
+
     if (title && title.length) {
-      this.setState({ newTodoDialogOpen: false }, () => this.props.addTodo(title));
+      this.setState({ newTodoDialogOpen: false }, () => this.props.addTodo({title: title}));
     }
   }
 
@@ -54,7 +56,14 @@ class Nav extends Component {
         open={this.state.newTodoDialogOpen}
       >
         <div className="input">
-          <input maxLength="10" ref="newTodoTitle" type="text"></input>
+          <form onSubmit={(e) => this.handleAddTodo(e)}>
+            <input
+              maxLength="10"
+              ref="newTodoTitle"
+              type="text"
+              autoFocus
+            />
+          </form>
         </div>
       </Dialog>
     );

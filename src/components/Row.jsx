@@ -46,43 +46,51 @@ class Row extends Component {
     });
   };
 
-  renderInputPopOver = (attr, inputType) => (
-    <div className="input-popover">
-      <h3>{startCase(attr)}</h3>
+  renderInputPopOver(attr, inputType) {
+    return (
+      <div className="input-popover">
+        <h3>{startCase(attr)}</h3>
 
-      <div className="input">
-        <input
-          maxLength="10"
-          placeholder={inputType === 'number' ? 'Input number here' : 'Input text here'}
-          autoFocus
-          ref="popOverInput"
-          type={inputType || 'text'}
+        <div className="input">
+          <input
+            maxLength="10"
+            placeholder={inputType === 'number' ? 'Input number here' : 'Input text here'}
+            autoFocus
+            ref="popOverInput"
+            defaultValue={this.props.todo.get(attr)}
+            type={inputType || 'text'}
+          />
+        </div>
+        <FlatButton
+          key={'cancel'}
+          label="Cancel"
+          style={{ color: '#0047bb' }}
+          onTouchTap={this.handlePopOverClose}
+        />
+        <FlatButton
+          key={'save'}
+          label="Save"
+          style={{ color: '#0047bb' }}
+          onTouchTap={() => this.handleUpdateTodo({
+            [attr]: this.refs.popOverInput.value,
+          })}
         />
       </div>
-      <FlatButton
-        key={'cancel'}
-        label="Cancel"
-        style={{ color: '#0047bb' }}
-        onTouchTap={this.handlePopOverClose}
-      />
-      <FlatButton
-        key={'save'}
-        label="Save"
-        style={{ color: '#0047bb' }}
-        onTouchTap={() => this.handleUpdateTodo({
-          [attr]: this.refs.popOverInput.value,
-        })}
-      />
-    </div>
-  );
+    );
+  }
 
-  renderMenuPopOver = (attr) => (
-    <Menu onChange={(e, v) => this.handleUpdateTodo({ [attr]: v })}>
-      <MenuItem value={"Home"} primaryText="Home" />
-      <MenuItem value={"Work"} primaryText="Work" />
-      <MenuItem value={"Life"} primaryText="Life" />
-    </Menu>
-  );
+  renderMenuPopOver(attr) {
+    return (
+      <Menu
+        value={this.props.todo.get('attr')}
+        onChange={(e, v) => this.handleUpdateTodo({ [attr]: v })}
+      >
+        <MenuItem value={"Home"} primaryText="Home" />
+        <MenuItem value={"Work"} primaryText="Work" />
+        <MenuItem value={"Life"} primaryText="Life" />
+      </Menu>
+    );
+  }
 
   renderPopOver = () => (
     <Popover
