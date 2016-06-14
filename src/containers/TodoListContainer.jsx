@@ -1,24 +1,17 @@
 import React, { Component, PropTypes } from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 import Immutable from 'immutable';
-import filter from 'lodash/filter';
 import { connect } from 'react-redux';
 import { getVisibleTodos } from '../reducers';
 import { appActions, todosActions } from '../actions';
 import Header from '../components/Header';
 import TableHeader from '../components/TableHeader';
-import TableBody from '../components/TableBody';
 import TableFooter from '../components/TableFooter';
-import TodoRow from '../components/TodoRow';
 
 class TodoListContainer extends Component {
   constructor(props) {
     super(props);
     this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
-    this.state = {
-      selectedTodos: [],
-      scrollShadowVisible: false,
-    };
   }
 
   componentDidMount() {
@@ -38,43 +31,14 @@ class TodoListContainer extends Component {
     }
   }
 
-  showScrollShadow(visible) {
-    this.setState({ scrollShadowVisible: visible });
-  }
-
   handleAddTodo = (title) => {
     this.props.addTodo({ title });
   }
 
   handleRemoveTodos = (ids) => {
     if (!ids) return null;
-
-    return this.setState({ selectedTodos: [] }, () => this.props.removeTodos(ids));
+    this.props.removeTodos(ids);
   }
-
-  selectTodo(todoId) {
-    let selected;
-    if (!todoId) return null;
-    const { selectedTodos } = this.state;
-
-    if (selectedTodos.includes(todoId)) {
-      selected = filter(selectedTodos, (id) => id !== todoId);
-    } else {
-      selected = selectedTodos.concat(todoId);
-    }
-    return this.setState({ selectedTodos: selected });
-  }
-
-  renderTodo = (key, todo, selected) => (
-    <TodoRow
-      key={key}
-      todo={todo}
-      selected={selected}
-      toggleTodo={this.props.toggleTodo}
-      updateTodo={this.props.updateTodo}
-      selectTodo={(todoId) => this.selectTodo(todoId)}
-    />
-  );
 
   render() {
     const {

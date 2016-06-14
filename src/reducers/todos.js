@@ -13,6 +13,12 @@ const todo = (state, action) => {
       return state.update('completed', v => !v);
     case todosActions.TOGGLE_ALL_TODOS:
       return state.set('completed', action.completed);
+    case todosActions.SELECT_TODO:
+      if (state.get('id') !== action.id) {
+        return state;
+      }
+
+      return state.update('selected', v => !v);
     case todosActions.UPDATE_TODO:
       if (state.get('id') !== action.id) {
         return state;
@@ -32,6 +38,8 @@ const todos = (state = List(), action) => {
       return state.filterNot(t => t.get('id') === action.id);
     case todosActions.REMOVE_TODOS:
       return state.filterNot(t => action.ids.includes(t.get('id')));
+    case todosActions.SELECT_TODO:
+      return state.map(t => todo(t, action));
     case todosActions.TOGGLE_TODO:
       return state.map(t => todo(t, action));
     case todosActions.TOGGLE_ALL_TODOS:
