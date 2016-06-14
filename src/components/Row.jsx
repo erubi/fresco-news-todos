@@ -23,7 +23,8 @@ class Row extends Component {
     this.props.toggleTodo(todoId);
   }
 
-  handleUpdateTodo = (data) => {
+  handleUpdateTodo = (e, data) => {
+    if(e) e.preventDefault();
     const { todo, updateTodo } = this.props;
     this.setState({ popOverOpen: false }, () => updateTodo(todo.get('id'), data));
   }
@@ -52,14 +53,20 @@ class Row extends Component {
         <h3>{startCase(attr)}</h3>
 
         <div className="input">
-          <input
-            maxLength="10"
-            placeholder={inputType === 'number' ? 'Input number here' : 'Input text here'}
-            autoFocus
-            ref="popOverInput"
-            defaultValue={this.props.todo.get(attr)}
-            type={inputType || 'text'}
-          />
+          <form
+            onSubmit={(e) => this.handleUpdateTodo(e, {
+              [attr]: this.refs.popOverInput.value,
+            })}
+          >
+            <input
+              maxLength="10"
+              placeholder={inputType === 'number' ? 'Input number here' : 'Input text here'}
+              autoFocus
+              ref="popOverInput"
+              defaultValue={this.props.todo.get(attr)}
+              type={inputType || 'text'}
+            />
+          </form>
         </div>
         <FlatButton
           key={'cancel'}
@@ -71,7 +78,7 @@ class Row extends Component {
           key={'save'}
           label="Save"
           style={{ color: '#0047bb' }}
-          onTouchTap={() => this.handleUpdateTodo({
+          onTouchTap={() => this.handleUpdateTodo(null, {
             [attr]: this.refs.popOverInput.value,
           })}
         />
@@ -83,7 +90,7 @@ class Row extends Component {
     return (
       <Menu
         value={this.props.todo.get('attr')}
-        onChange={(e, v) => this.handleUpdateTodo({ [attr]: v })}
+        onChange={(e, v) => this.handleUpdateTodo(null, { [attr]: v })}
       >
         <MenuItem value={"Home"} primaryText="Home" />
         <MenuItem value={"Work"} primaryText="Work" />
