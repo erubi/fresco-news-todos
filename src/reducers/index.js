@@ -13,3 +13,6 @@ export const getVisibleTodos = (state) => (
   fromTodos.getVisibleTodos(state.get('todos'), state.get('app'))
 );
 
+export const getSelectedTodos = (state) => (
+  fromTodos.getSelectedTodos(state.get('todos'))
+);

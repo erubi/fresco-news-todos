@@ -3,19 +3,12 @@ import PureRenderMixin from 'react-addons-pure-render-mixin';
 import Immutable from 'immutable';
 import { connect } from 'react-redux';
 import { getVisibleTodos } from '../reducers';
-import ListBody from '../components/ListBody';
-import ListRow from '../containers/ListRow';
+import Row from './Row';
 
-class ListBody extends Component {
+class Body extends Component {
   constructor(props) {
     super(props);
     this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
-  }
-
-  renderTodo(key, todo) {
-    return (
-      <ListRow key={key} todo={todo} />
-    );
   }
 
   render() {
@@ -25,7 +18,7 @@ class ListBody extends Component {
       <div id="tbody-ctr" className="tbody-ctr">
         <table>
           <tbody>
-            {todos.map((todo, i) => this.renderTodo(i, todo, this.isSelected(todo.get('id'))))}
+            {todos.map((todo, i) => <Row key={i} todo={todo} />)}
           </tbody>
         </table>
       </div>
@@ -33,11 +26,8 @@ class ListBody extends Component {
   }
 }
 
-ListBodyContainer.propTypes = {
+Body.propTypes = {
   todos: PropTypes.instanceOf(Immutable.List).isRequired,
-  selectedTodos: PropTypes.array.isRequired,
-  renderTodo: PropTypes.func.isRequired,
-  showScrollShadow: PropTypes.func.isRequired,
 };
 
 function mapStateToProps(state) {
@@ -46,4 +36,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(ListBodyContainer);
+export default connect(mapStateToProps)(Body);

@@ -1,9 +1,12 @@
 import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
+import { getVisibleTodos } from '../reducers';
+import { appActions } from '../actions';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 import DropDownMenu from 'material-ui/DropDownMenu';
 import MenuItem from 'material-ui/MenuItem';
 
-class TableFooter extends Component {
+class Footer extends Component {
   constructor(props) {
     super(props);
     this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
@@ -59,7 +62,7 @@ class TableFooter extends Component {
   }
 }
 
-TableFooter.propTypes = {
+Footer.propTypes = {
   rows: PropTypes.number.isRequired,
   page: PropTypes.number.isRequired,
   totalNumTodos: PropTypes.number.isRequired,
@@ -69,4 +72,18 @@ TableFooter.propTypes = {
   nextPage: PropTypes.func.isRequired,
 };
 
-export default TableFooter;
+function mapStateToProps(state) {
+  return {
+    rows: state.getIn(['app', 'rows']),
+    page: state.getIn(['app', 'page']),
+    totalNumTodos: state.get('todos').size,
+    visibleNumTodos: getVisibleTodos(state).size,
+  };
+}
+
+export default connect(mapStateToProps, {
+  setRows: appActions.setRows,
+  prevPage: appActions.prevPage,
+  nextPage: appActions.nextPage,
+})(Footer);
+

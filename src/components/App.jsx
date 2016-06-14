@@ -2,12 +2,12 @@ import React, { Component, PropTypes } from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 import { connect } from 'react-redux';
 import { appActions } from '../actions';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
-import Nav from '../components/Nav';
-import Body from '../components/Body';
+import Header from './Header';
+import Footer from './Footer';
+import Nav from './Nav';
+import Body from './Body';
 
-class TodoListContainer extends Component {
+class App extends Component {
   constructor(props) {
     super(props);
     this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
@@ -38,7 +38,7 @@ class TodoListContainer extends Component {
     if (mobile) {
       return (
         <div>
-          <Nav />
+          <Nav title={'title'} />
           <div className="todos-table-ctr">
             <Header />
             <Body />
@@ -49,7 +49,7 @@ class TodoListContainer extends Component {
 
     return (
       <div>
-        <Nav />
+        <Nav title={'title'} />
         <div className="todos-table-ctr">
           <Header />
           <Body />
@@ -66,12 +66,12 @@ function mapStateToProps(state) {
   };
 }
 
-TodoListContainer.propTypes = {
+App.propTypes = {
   mobile: PropTypes.bool.isRequired,
   setMobile: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, {
   setMobile: appActions.setMobile,
-})(TodoListContainer);
+})(App);
 

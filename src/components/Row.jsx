@@ -1,5 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
+import { connect } from 'react-redux';
+import { todosActions } from '../actions';
 import Immutable from 'immutable';
 import Menu from 'material-ui/Menu';
 import MenuItem from 'material-ui/MenuItem';
@@ -7,7 +9,7 @@ import Popover from 'material-ui/Popover';
 import FlatButton from 'material-ui/FlatButton';
 import startCase from 'lodash/startCase';
 
-class ListRow extends Component {
+class Row extends Component {
   constructor(props) {
     super(props);
     this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
@@ -120,12 +122,11 @@ class ListRow extends Component {
   }
 
   render() {
-    const { todo, selectTodo, selected } = this.props;
-    const className = selected ? 'selected-todo' : '';
+    const { todo, selectTodo } = this.props;
 
     return (
       <tr
-        className={className}
+        className={`${todo.get('selected') ? 'selected-todo' : ''}`}
         onClick={() => selectTodo(todo.get('id'))}
       >
         <td>
@@ -168,13 +169,16 @@ class ListRow extends Component {
   }
 }
 
-ListRow.propTypes = {
+Row.propTypes = {
   todo: PropTypes.instanceOf(Immutable.Map),
   toggleTodo: PropTypes.func.isRequired,
   updateTodo: PropTypes.func.isRequired,
   selectTodo: PropTypes.func.isRequired,
-  selected: PropTypes.bool.isRequired,
 };
 
-export default ListRow;
+export default connect(undefined, {
+  toggleTodo: todosActions.toggleTodo,
+  updateTodo: todosActions.updateTodo,
+  selectTodo: todosActions.selectTodo,
+})(Row);
 

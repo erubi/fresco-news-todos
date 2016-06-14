@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { Provider } from 'react-redux';
-import TodoListContainer from './TodoListContainer';
+import App from './App';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import '../stylesheets/index.scss';
@@ -15,7 +15,7 @@ const Root = ({ store }) => (
   <Provider store={store}>
     <MuiThemeProvider muiTheme={muiTheme}>
       <div className="app-ctr">
-        <TodoListContainer />
+        <App />
       </div>
     </MuiThemeProvider>
   </Provider>

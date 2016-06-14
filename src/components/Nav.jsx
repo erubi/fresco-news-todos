@@ -1,10 +1,14 @@
 import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
+import { List } from 'immutable';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
+import { getSelectedTodos } from '../reducers';
+import { todosActions } from '../actions';
 import FontIcon from 'material-ui/FontIcon';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 
-class Header extends Component {
+class Nav extends Component {
   constructor(props) {
     super(props);
     this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
@@ -20,7 +24,7 @@ class Header extends Component {
   handleAddTodo = () => {
     const title = this.refs.newTodoTitle.value;
     if (title && title.length) {
-      this.setState({ newTodoDialogOpen: false }, this.props.handleAddTodo(title));
+      this.setState({ newTodoDialogOpen: false }, () => this.props.addTodo(title));
     }
   }
 
@@ -57,8 +61,8 @@ class Header extends Component {
   }
 
   render = () => {
-    const { title, selectedTodos, handleRemoveTodos } = this.props;
-    const numSelected = selectedTodos.length;
+    const { title, selectedTodos, removeTodos } = this.props;
+    const numSelected = selectedTodos ? selectedTodos.size : 0;
 
     if (numSelected) {
       return (
@@ -69,7 +73,7 @@ class Header extends Component {
           <FontIcon className="material-icons">more_vert</FontIcon>
           <FontIcon
             className="material-icons"
-            onClick={() => handleRemoveTodos(selectedTodos)}
+            onClick={() => removeTodos(selectedTodos.map(t => t.get('id')))}
           >
             delete
           </FontIcon>
@@ -88,11 +92,20 @@ class Header extends Component {
   }
 }
 
-Header.propTypes = {
+Nav.propTypes = {
   title: PropTypes.string.isRequired,
-  handleAddTodo: PropTypes.func.isRequired,
-  handleRemoveTodos: PropTypes.func.isRequired,
-  selectedTodos: PropTypes.array.isRequired,
+  addTodo: PropTypes.func.isRequired,
+  removeTodos: PropTypes.func.isRequired,
+  selectedTodos: PropTypes.instanceOf(List),
 };
 
-export default Header;
+function mapStateToProps(state) {
+  return {
+    selectedTodos: getSelectedTodos(state),
+  };
+}
+
+export default connect(mapStateToProps, {
+  addTodo: todosActions.addTodo,
+  removeTodos: todosActions.removeTodos,
+})(Nav);

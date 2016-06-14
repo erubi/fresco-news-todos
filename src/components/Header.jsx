@@ -5,7 +5,7 @@ import { todosActions } from '../actions';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 import Immutable from 'immutable';
 
-class ListHeader extends Component {
+class Header extends Component {
   constructor(props) {
     super(props);
     this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
@@ -60,7 +60,7 @@ class ListHeader extends Component {
   }
 }
 
-ListHeader.propTypes = {
+Header.propTypes = {
   todos: PropTypes.instanceOf(Immutable.List).isRequired,
   handleToggleAllTodos: PropTypes.func.isRequired,
 };
@@ -73,5 +73,5 @@ function mapStateToProps(state) {
 
 export default connect(mapStateToProps, {
   handleToggleAllTodos: todosActions.toggleAllTodos,
-})(ListHeader);
+})(Header);
 

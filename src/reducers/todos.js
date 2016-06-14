@@ -66,3 +66,7 @@ export const getVisibleTodos = (todosState, appState) => {
   return todosState.slice(i, j);
 };
 
+export const getSelectedTodos = (todosState) => (
+  todosState.filter(v => v.get('selected'))
+);
+
