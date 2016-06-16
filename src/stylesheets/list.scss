@@ -11,6 +11,13 @@ th, td{
   text-align: left;
 }
 
+.todos-list{
+	@media only screen and (max-width: 600px) {
+    overflow: scroll;
+  }
+}
+
+// DIALOG
 .dialog{
   width: 384px !important;
   background-color: $light-gray;
@@ -23,6 +30,7 @@ th, td{
   border-bottom: 2px solid #0047bb;
 }
 
+// NAV
 .nav{
   padding: 20px 24px;
   height: 64px;
@@ -37,6 +45,8 @@ th, td{
 .nav__icon{
   float: right;
   margin-left: 25px;
+  color: $gray;
+  cursor: pointer;
 }
 
 .nav--selected{
@@ -46,19 +56,7 @@ th, td{
   color: $blue;
 }
 
-
-.material-icons {
-  color: $gray;
-  cursor: pointer;
-}
-
-.todos-table-ctr{
-
-	@media only screen and (max-width: 600px) {
-    overflow: scroll;
-  }
-}
-
+// HEADER
 .table-header-ctr{
   height: 56px;
   position: relative;
@@ -93,7 +91,8 @@ th, td{
   }
 }
 
-.tbody-ctr{
+// BODY
+.todos-list__body{
   height: 480px;
   overflow-y: scroll;
   width: 100%;
@@ -103,97 +102,100 @@ th, td{
 		overflow-y: visible;
     height: 100%;
 	}
+}
 
-  .cell-text{
-    display: inline-block;
+.todos-list__tr{
+  height: 48px;
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.todos-list__tr--selected{
+  background-color: $dark-gray;
+}
+
+.todos-list__td{
+  vertical-align: middle;
+  padding: 0 24px;
+  height: 48px !important;
+  box-sizing: border-box;
+  cursor: pointer;
+  @media only screen and (max-width: 600px) {
+    width: 140px;
+  }
+  &:first-child{
     width: 44px;
   }
-
-  tr{
-    height: 48px;
-    border-top: 1px solid rgba(0, 0, 0, 0.12);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
-
-    &.selected-todo{
-      background-color: $dark-gray;
-    }
-
-    td{
-      display: table-cell;
-      vertical-align: middle;
-      padding: 0 24px;
-      height: 48px !important;
-      box-sizing: border-box;
-      cursor: pointer;
-			&:first-child{
-				width: 44px;
-			}
-			i{
-				vertical-align: middle;
-			}
-			@media only screen and (max-width: 600px) {
-				width: 140px;
-			}
-    }
+  i{
+    vertical-align: middle;
   }
 }
 
-.input-popover{
+.todos-list__td-text{
+  display: inline-block;
+  width: 44px;
+}
+
+.popover{
   padding: 20px 24px;
   overflow: auto;
-
-  input{
-    margin-top: 21px;
-    margin-bottom: 40px;
-    width: 336px;
-    outline: none;
-    border: none;
-    border-bottom: 2px solid #0047bb;
-  }
-
-  button{
-    float: right;
-  }
 }
 
-.todos-table-footer{
+.popover__input{
+  margin-top: 21px;
+  margin-bottom: 40px;
+  width: 336px;
+  outline: none;
+  border: none;
+  border-bottom: 2px solid #0047bb;
+}
+
+.popover__button{
+  float: right;
+}
+
+// FOOTER
+.footer{
   height: 56px;
   background-color: $light-gray;
 	box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.12);
+}
 
-  .footer-controls{
-    display: table;
-    height: 100%;
-    vertical-align: middle;
-    color: $gray;
-    font-size: 12px;
-    float: right;
-    padding: 0 16px;
+.footer__controls{
+  display: table;
+  height: 100%;
+  vertical-align: middle;
+  color: $gray;
+  font-size: 12px;
+  float: right;
+  padding: 0 16px;
+}
 
-    .rows-dropdown{
-      vertical-align: middle;
-    }
-    .rows-label{
-      display: table-cell;
-      vertical-align: middle;
-    }
+.footer__dropdown{
+  vertical-align: middle;
+}
 
-    .page-label{
-      display: table-cell;
-      vertical-align: middle;
-      padding-right: 24px;
-      width: 65px;
-    }
+.footer__dropdown-label{
+  display: table-cell;
+  vertical-align: middle;
+}
 
-    i.material-icons{
-      display: table-cell;
-      vertical-align: middle;
-      &:last-child{
-        padding-left: 16px;
-      }
-      color: $gray;
-      font-size: 20px;
-    }
+.footer__page-label{
+  display: table-cell;
+  vertical-align: middle;
+  padding-right: 24px;
+  width: 65px;
+}
+
+.footer__icon{
+  display: table-cell;
+  vertical-align: middle;
+  color: $gray;
+  font-size: 20px;
+  cursor: pointer;
+
+  &:last-child{
+    padding-left: 16px;
   }
 }
 

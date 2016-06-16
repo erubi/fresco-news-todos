@@ -49,16 +49,17 @@ class Row extends Component {
 
   renderInputPopOver(attr, inputType) {
     return (
-      <div className="input-popover">
+      <div className="popover">
         <h3>{startCase(attr)}</h3>
 
-        <div className="input">
+        <div>
           <form
             onSubmit={(e) => this.handleUpdateTodo(e, {
               [attr]: this.refs.popOverInput.value,
             })}
           >
             <input
+              className="popover__input"
               maxLength="10"
               placeholder={inputType === 'number' ? 'Input number here' : 'Input text here'}
               autoFocus
@@ -69,12 +70,14 @@ class Row extends Component {
           </form>
         </div>
         <FlatButton
+          className="popover__button"
           key={'cancel'}
           label="Cancel"
           style={{ color: '#0047bb' }}
           onTouchTap={this.handlePopOverClose}
         />
         <FlatButton
+          className="popover__button"
           key={'save'}
           label="Save"
           style={{ color: '#0047bb' }}
@@ -141,40 +144,40 @@ class Row extends Component {
 
     return (
       <tr
-        className={`${todo.get('selected') ? 'selected-todo' : ''}`}
+        className={`todos-list__tr ${todo.get('selected') ? 'todos-list__tr--selected' : ''}`}
         onClick={() => selectTodo(todo.get('id'))}
       >
-        <td>
+        <td className="todos-list__td">
           {this.renderPopOver()}
           {this.renderCheckBox(todo)}
         </td>
-        <td>
+        <td className="todos-list__td">
           <span onClick={(e) => this.handlePopOverOpen(e, 'title', 'text')}>
             {todo.get('title')}
           </span>
         </td>
-        <td>
+        <td className="todos-list__td">
           <span onClick={(e) => this.handlePopOverOpen(e, 'category', 'menu')}>
-            <span className="cell-text">{todo.get('category') || 'null'}</span>
+            <span className="todos-list__td-text">{todo.get('category') || 'null'}</span>
             <i className="material-icons">arrow_drop_down</i>
           </span>
         </td>
-        <td>
+        <td className="todos-list__td">
           <span onClick={(e) => this.handlePopOverOpen(e, 'status', 'text')}>
             {todo.get('status') || 'null'}
           </span>
         </td>
-        <td>
+        <td className="todos-list__td">
           <span onClick={(e) => this.handlePopOverOpen(e, 'hours', 'number')}>
             {todo.get('hours') || 'null'}
           </span>
         </td>
-        <td>
+        <td className="todos-list__td">
           <span onClick={(e) => this.handlePopOverOpen(e, 'percentComplete', 'number')}>
             {todo.get('percentComplete') ? `${todo.get('percentComplete')}%` : 'null'}
           </span>
         </td>
-        <td>
+        <td className="todos-list__td">
           <span onClick={(e) => this.handlePopOverOpen(e, 'note', 'text')}>
             {todo.get('note') || 'null'}
           </span>

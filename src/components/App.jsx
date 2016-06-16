@@ -39,7 +39,7 @@ class App extends Component {
       return (
         <div>
           <Nav title={'title'} />
-          <div className="todos-table-ctr">
+          <div className="todos-list">
             <Header />
             <Body />
           </div>
@@ -50,7 +50,7 @@ class App extends Component {
     return (
       <div>
         <Nav title={'title'} />
-        <div className="todos-table-ctr">
+        <div className="todos-list">
           <Header />
           <Body />
           <Footer />

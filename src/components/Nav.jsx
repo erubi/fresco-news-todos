@@ -81,7 +81,7 @@ class Nav extends Component {
           </span>
           <FontIcon className="material-icons nav__icon">more_vert</FontIcon>
           <FontIcon
-            className="matieral-icons nav__icon"
+            className="material-icons nav__icon"
             onClick={() => removeTodos(selectedTodos.map(t => t.get('id')))}
           >
             delete
