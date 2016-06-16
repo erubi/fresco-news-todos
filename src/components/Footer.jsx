@@ -29,16 +29,16 @@ class Footer extends Component {
     const j = i + rows;
 
     return (
-      <div className="todos-table-footer">
-        <div className="footer-controls">
-          <div className="rows-label">Rows per page:</div>
+      <div className="footer">
+        <div className="footer__controls">
+          <div className="footer__dropdown-label">Rows per page:</div>
           <DropDownMenu
             underlineStyle={{ display: 'none' }}
             iconStyle={{ fill: 'rgba(0, 0, 0, 0.54)', fontSize: '12px' }}
             labelStyle={{ fontSize: '12px', color: 'rgba(0, 0, 0, 0.54)' }}
             value={rows}
             onChange={this.handleSetRows}
-            className="rows-dropdown"
+            className="footer__dropdown"
           >
             <MenuItem value={5} primaryText="5" />
             <MenuItem value={10} primaryText="10" />
@@ -48,14 +48,14 @@ class Footer extends Component {
             <MenuItem value={30} primaryText="30" />
           </DropDownMenu>
 
-          <div className="page-label">
+          <div className="footer__page-label">
             {`
               ${totalNumTodos ? (i || 1) : 0}-${j > totalNumTodos ? visibleNumTodos + i : j}
               of ${totalNumTodos}
             `}
           </div>
-          <i onClick={prevPage} className="material-icons">chevron_left</i>
-          <i onClick={nextPage} className="material-icons">chevron_right</i>
+          <i onClick={prevPage} className="material-icons footer__icon">chevron_left</i>
+          <i onClick={nextPage} className="material-icons footer__icon">chevron_right</i>
         </div>
       </div>
     );

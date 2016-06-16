@@ -15,7 +15,7 @@ class Body extends Component {
     const { todos } = this.props;
 
     return (
-      <div id="tbody-ctr" className="tbody-ctr">
+      <div id="tbody-ctr" className="todos-list__body">
         <table>
           <tbody>
             {todos.map((todo, i) => <Row key={i} todo={todo} />)}

@@ -33,15 +33,15 @@ class Nav extends Component {
   renderAddTodoDialog() {
     const actions = [
       <FlatButton
+        className="dialog__button"
         key={'cancel'}
         label="Cancel"
-        style={{ color: '#0047bb' }}
         onTouchTap={() => this.setState({ newTodoDialogOpen: false })}
       />,
       <FlatButton
+        className="dialog__button"
         key={'save'}
         label="Save"
-        style={{ color: '#0047bb' }}
         onTouchTap={this.handleAddTodo}
       />,
     ];
@@ -49,15 +49,15 @@ class Nav extends Component {
     return (
       <Dialog
         title="Title"
-        contentClassName={'new-todo-dialog'}
-        titleClassName={'new-todo-dialog-title'}
+        contentClassName={'dialog'}
         actions={actions}
         modal
         open={this.state.newTodoDialogOpen}
       >
-        <div className="input">
+        <div>
           <form onSubmit={(e) => this.handleAddTodo(e)}>
             <input
+              className="dialog__input"
               maxLength="10"
               ref="newTodoTitle"
               type="text"
@@ -75,13 +75,13 @@ class Nav extends Component {
 
     if (numSelected) {
       return (
-        <div className="header-ctr selected-todos">
-          <span className="selected-text">
+        <div className="nav nav--selected">
+          <span>
             {`${numSelected} item${numSelected > 1 ? "'s" : ''} selected`}
           </span>
-          <FontIcon className="material-icons">more_vert</FontIcon>
+          <FontIcon className="material-icons nav__icon">more_vert</FontIcon>
           <FontIcon
-            className="material-icons"
+            className="material-icons nav__icon"
             onClick={() => removeTodos(selectedTodos.map(t => t.get('id')))}
           >
             delete
@@ -91,11 +91,11 @@ class Nav extends Component {
     }
 
     return (
-      <div className="header-ctr">
+      <div className="nav">
         {this.renderAddTodoDialog()}
-        <span className="title">{title}</span>
-        <FontIcon className="material-icons">more_vert</FontIcon>
-        <FontIcon className="material-icons" onClick={this.openNewTodoDialog}>add</FontIcon>
+        <span className="nav__title">{title}</span>
+        <FontIcon className="material-icons nav__icon">more_vert</FontIcon>
+        <FontIcon className="material-icons nav__icon" onClick={this.openNewTodoDialog}>add</FontIcon>
       </div>
     );
   }

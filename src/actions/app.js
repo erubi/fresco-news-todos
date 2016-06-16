@@ -8,7 +8,7 @@ export const nextPage = () => (dispatch, getState) => {
   const rows = getState().getIn(['app', 'rows']);
   const totalNumTodos = getState().get('todos').size;
 
-  if (((page * rows) + rows) > totalNumTodos) {
+  if (((page * rows) + rows) >= totalNumTodos) {
     return null;
   }
 

@@ -38,22 +38,26 @@ class Header extends Component {
     } = this.props;
 
     return (
-      <table>
-        <thead className="table-header-ctr">
-          <tr className="header-cells">
-            <th>
+      <table className="todos-list__header">
+        <thead>
+          <tr className="todos-list__header-tr">
+            <th className="todos-list__header-th">
               <i onClick={handleToggleAllTodos} className="material-icons">
                 {todos.every(t => t.get('completed')) ? 'check_box' : 'check_box_outline_blank'}
               </i>
             </th>
-            <th>Title</th>
-            <th>Category</th>
-            <th>Status</th>
-            <th>Hours (n)</th>
-            <th>Completed (%)</th>
-            <th>Note</th>
+            <th className="todos-list__header-th">Title</th>
+            <th className="todos-list__header-th">Category</th>
+            <th className="todos-list__header-th">Status</th>
+            <th className="todos-list__header-th">Hours (n)</th>
+            <th className="todos-list__header-th">Completed (%)</th>
+            <th className="todos-list__header-th">Note</th>
           </tr>
-          <tr className={`shadow-tr ${this.state.scrollShadowVisible ? '' : 'no-display'}`} />
+          <tr
+            className={`
+              todos-list__shadow-tr ${this.state.scrollShadowVisible ? '' : 'no-display'}
+              `}
+          />
         </thead>
       </table>
     );
