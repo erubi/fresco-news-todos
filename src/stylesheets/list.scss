@@ -11,43 +11,41 @@ th, td{
   text-align: left;
 }
 
-.new-todo-dialog{
+.dialog{
   width: 384px !important;
   background-color: $light-gray;
-
-  input{
-    width: 336px;
-    outline: none;
-    border: none;
-    border-bottom: 2px solid #0047bb;
-  }
 }
 
-.nav-ctr{
+.dialog__input{
+  width: 336px;
+  outline: none;
+  border: 0;
+  border-bottom: 2px solid #0047bb;
+}
+
+.nav{
   padding: 20px 24px;
   height: 64px;
   box-sizing: border-box;
-
-  .title{
-    font-weight: 700;
-    font-size: 20px;
-  }
-
-  .material-icons {
-    float: right;
-    margin-left: 25px;
-  }
-
-  &.selected-todos{
-    background-color: $light-blue;
-
-    .selected-text{
-      font-weight: 500;
-      font-size: 16px;
-      color: $blue;
-    }
-  }
 }
+
+.nav__title{
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.nav__icon{
+  float: right;
+  margin-left: 25px;
+}
+
+.nav--selected{
+  background-color: $light-blue;
+  font-weight: 500;
+  font-size: 16px;
+  color: $blue;
+}
+
 
 .material-icons {
   color: $gray;
@@ -55,6 +53,7 @@ th, td{
 }
 
 .todos-table-ctr{
+
 	@media only screen and (max-width: 600px) {
     overflow: scroll;
   }
@@ -70,7 +69,7 @@ th, td{
     height: 1px;
     box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.7);
     background-color: $light-gray;
-    border: none;
+    border: 0;
     display: block;
     width: 1024px;
   }
@@ -99,6 +98,7 @@ th, td{
   overflow-y: scroll;
   width: 100%;
   font-size: 14px;
+
 	@media only screen and (max-width: 600px) {
 		overflow-y: visible;
     height: 100%;
@@ -137,6 +137,7 @@ th, td{
     }
   }
 }
+
 .input-popover{
   padding: 20px 24px;
   overflow: auto;
