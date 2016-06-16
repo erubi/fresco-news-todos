@@ -38,8 +38,8 @@ class Header extends Component {
     } = this.props;
 
     return (
-      <table>
-        <thead className="table-header-ctr">
+      <table className="table-header-ctr">
+        <thead>
           <tr className="header-cells">
             <th>
               <i onClick={handleToggleAllTodos} className="material-icons">

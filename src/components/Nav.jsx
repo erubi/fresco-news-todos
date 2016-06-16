@@ -75,7 +75,7 @@ class Nav extends Component {
 
     if (numSelected) {
       return (
-        <div className="header-ctr selected-todos">
+        <div className="nav-ctr selected-todos">
           <span className="selected-text">
             {`${numSelected} item${numSelected > 1 ? "'s" : ''} selected`}
           </span>
@@ -91,7 +91,7 @@ class Nav extends Component {
     }
 
     return (
-      <div className="header-ctr">
+      <div className="nav-ctr">
         {this.renderAddTodoDialog()}
         <span className="title">{title}</span>
         <FontIcon className="material-icons">more_vert</FontIcon>
