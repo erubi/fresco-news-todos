@@ -33,15 +33,15 @@ class Nav extends Component {
   renderAddTodoDialog() {
     const actions = [
       <FlatButton
+        className="dialog__button"
         key={'cancel'}
         label="Cancel"
-        style={{ color: '#0047bb' }}
         onTouchTap={() => this.setState({ newTodoDialogOpen: false })}
       />,
       <FlatButton
+        className="dialog__button"
         key={'save'}
         label="Save"
-        style={{ color: '#0047bb' }}
         onTouchTap={this.handleAddTodo}
       />,
     ];

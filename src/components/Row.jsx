@@ -71,19 +71,17 @@ class Row extends Component {
         </div>
         <FlatButton
           className="popover__button"
-          key={'cancel'}
-          label="Cancel"
-          style={{ color: '#0047bb' }}
-          onTouchTap={this.handlePopOverClose}
-        />
-        <FlatButton
-          className="popover__button"
           key={'save'}
           label="Save"
-          style={{ color: '#0047bb' }}
           onTouchTap={() => this.handleUpdateTodo(null, {
             [attr]: this.refs.popOverInput.value,
           })}
+        />
+        <FlatButton
+          className="popover__button"
+          key={'cancel'}
+          label="Cancel"
+          onTouchTap={this.handlePopOverClose}
         />
       </div>
     );
