@@ -32,7 +32,7 @@ module.exports = {
   },
   output: {
     path: `${__dirname}/dist`,
-    publicPath: '/dist/',
+    publicPath: '/material-todos/dist/',
     filename: 'bundle.js',
   },
   devtool: 'source-map',
